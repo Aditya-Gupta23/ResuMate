@@ -3,7 +3,7 @@ import cors from "cors"
 import cookieParser from "cookie-parser"
 import morgan from "morgan";
 import authRoutes from "./routes/auth.routes.js";
-
+import "./config/passport.js";
 
 
 const app=express()

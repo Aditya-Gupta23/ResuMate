@@ -22,9 +22,10 @@ const userSchema=new mongoose.Schema({
         type: String,
         default: null,
     },
-    otp:{
-        type:Date,
+    otpHash:{
+        type:String,
         default: null,
+        select:false
     },
     otpExpiry: {
         type: Date,
