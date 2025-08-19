@@ -231,11 +231,12 @@ export const googleLogin=async(req,res)=>{
         })
         const payload=ticket.getPayload();
         const { sub, email, name, picture } = payload;
-        let {user}=await User.findOne({email});
+        let user=await User.findOne({email});
         if(!user){
             user=await User.create({
                 name,
                 email,
+                googleId: sub,
                 isVerified:true,
                 provider:"google",
                 picture,
@@ -260,7 +261,7 @@ export const googleLogin=async(req,res)=>{
         })
 
     } catch (error) {
-        console.error("Google login error:", err);
+        console.error("Google login error:", error);
         return res.status(500).json({ message: "Google login failed" });
     }
 }
