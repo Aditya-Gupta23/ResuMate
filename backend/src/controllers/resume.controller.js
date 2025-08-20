@@ -1,4 +1,6 @@
 import Resumes from '../models/resume.model.js'
+import fs from "fs"
+import path from "path"
 
 export const createReusme=async (req,res)=>{
     try {
@@ -118,8 +120,37 @@ export const updateResume=async(req,res)=>{
 
 export const deleteResume=async(req,res)=>{
     try {
-        
+        const resume=await Resume.findOne({
+            _id:req.params.id,
+            userId:req.user._id
+        })
+        if(!resume) return res(404).json({message:"Resume not found or aurthorized"});
+
+        const uploadsFolder=path.join(process.cwd(),'uploads');
+
+        if(resume.thumbnailLink){
+            const oldThumbnail=path.join(uploadsFolder,path.basename(resume.thumbnailLink))
+            if(fs.existsSync(oldThumbnail)){
+                fs.unlink(oldThumbnail)
+            }
+        }
+
+        if(resume.profileInfo?.profilePreviewUrl){
+            const oldProfile=path.join(
+                uploadsFolder,
+                path.basename(resume.profileInfo.profilePreviewUrl)
+            )
+            if(fs.existsSync(oldProfile)){
+                fs.unlinkSync(oldProfile)
+            }
+        }
+        const deleted=Resumes.findOneAndDelete({
+            _id:req.params.id,
+            userId:req.user._id
+        })
+        if(!deleted)res.status(404).json({message:"Resume not found or not aurthorized"});
+        return res.status(200).json({message:"resume deleted sucessufully"});
     } catch (error) {
-        
+        return res.status(500).json({message:"Failed to update resume"})
     }
 }
