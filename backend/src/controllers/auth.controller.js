@@ -4,6 +4,26 @@ import jwt from "jsonwebtoken";
 import nodemailer from "nodemailer";
 import { OAuth2Client } from "google-auth-library";
 
+const signAccessToken=(userId)=>{
+  return jwt.sign({id:userId},process.env.JWT_SECRET,{expiresIn:'15m'})
+}
+
+const signRefreshToken=(userId)=>{
+  return jwt.sign({id:userId},process.env.JWT_REFRESH_SECRET,{expiresIn:'7d'})
+}
+
+const sendTokens=(res,user)=>{
+  const accessToken=signAccessToken(user._id)
+  const refreshToken=signRefreshToken(user._id)
+
+  res.cookie("refreshToken",refreshToken,{
+    httpOnly:true,
+    secure:process.env.NODE_ENV==='production',
+    sameSite: "strict",
+    maxAge: 7 * 24 * 60 * 60 * 1000,
+  })
+  return accessToken;
+}
 
 const transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST,
@@ -62,9 +82,6 @@ const generateOtp = () => {
    return Math.floor(100000 + Math.random() * 900000).toString();
 }
 
-const signJwt = (userId) => {
-   return jwt.sign({ id: userId }, process.env.JWT_SECRET,{ expiresIn: "7d" })
-}
 
 export const signup = async (req, res) => {
 
@@ -127,10 +144,11 @@ export const verifyOtp=async (req,res)=>{
         user.otpExpiry = null;
         await user.save()
 
-        const token=signJwt(user._id)
+        const accessToken=sendTokens(res,user)
+
         return res.json({
             message: "Email verified successfully",
-            token,
+            accessToken,
             user:{
                 id:user._id,
                 name:user.name,
@@ -179,14 +197,15 @@ export const login=async (req,res)=>{
       return res.status(400).json({ message: "Email not verified" });
     const matched=await bcrypt.compare(password,user.password)
     if(!matched) return res.status(400).json({message:"Invalid credentials"})
-    const token=signJwt(user._id);
+
+    const accessToken=sendTokens(res,user);
     return res.json({
       messsage:"login successful",
-      token,
+      accessToken,
       user:{
         id: user._id, name: user.name, email: user.email
       }
-    })
+    });
     
   } catch (error) {
     console.error("Login Error:", error);
@@ -208,10 +227,10 @@ export const me=async(req,res)=>{
 export const googleAuthCallback = (req, res) => {
   const user = req.user;
 
-  const token = signJwt(user._id);
+  const accessToken = sendTokens(res,user);
   return res.json({
     message: "Google login successful",
-    token,
+    accessToken,
     user: {
       id: user._id,
       name: user.name,
@@ -243,15 +262,11 @@ export const googleLogin=async(req,res)=>{
             })
         }
 
-        const token=jwt.sign(
-            {_id:user._id},
-            process.env.JWT_SECRET,
-            {expiresIn:'7d'}
-        );
+        const accessToken = sendTokens(res, user);
 
         return res.json({
             message:"Login successful",
-            token,
+            accessToken,
             user:{
                 id:user._id,
                 name:user.name,
@@ -264,4 +279,30 @@ export const googleLogin=async(req,res)=>{
         console.error("Google login error:", error);
         return res.status(500).json({ message: "Google login failed" });
     }
+}
+
+export const refreshToken=async(req,res)=>{
+  try {
+    const token=req.cookies.refreshToken;
+    if(!token) return res.status(401).json({message:"Refresh Token not found"});
+    
+    jwt.verify(token,process.env.JWT_REFRESH_SECRET,(err,decoded)=>{
+      if (err) return res.status(403).json({ message: "Invalid refresh token" });
+      const accessToken=signAccessToken(decoded.id);
+      return res.json({accessToken})
+    })
+
+  } catch (error) {
+      console.error("Refresh Token Error:", error);
+      return res.status(500).json({ message: "Server error" });
+  }
+}
+
+export const logout=async(req,res)=>{
+  res.clearCookie("refreshToken",{
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "strict",
+  })
+  return res.json({ message: "Logged out successfully" });
 }
