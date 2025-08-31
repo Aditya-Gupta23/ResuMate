@@ -82,8 +82,8 @@ export const landingPageStyles = {
 
   // Feature cards
   featureCard: "group relative",
-  featureCardHover: "absolute -inset-2 bg-gradient-to-r opacity-0 group-hover:opacity-30 transition-opacity blur-xl rounded-3xl from-violet-200 to-fuchsia-200",
-  featureCardContent: "mx-20 relative bg-gradient-to-br border border-white/50 p-6 sm:p-8 rounded-3xl hover:shadow-2xl transition-all group-hover:scale-105",
+  featureCardHover: "absolute -inset-2 bg-gradient-to-r opacity-0 group-hover:opacity-100 transition-opacity blur-xl rounded-3xl from-violet-200 to-fuchsia-200",
+  featureCardContent: "relative bg-gradient-to-br border border-white/50 p-6 sm:p-8 rounded-3xl hover:shadow-2xl transition-all group-hover:scale-105",
   featureIconContainer: "w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br rounded-2xl flex items-center justify-center mb-4 sm:mb-6 text-white shadow-lg",
   featureIcon: "w-8 h-8 sm:w-10 sm:h-10",
   featureTitle: "text-xl sm:text-2xl font-black text-slate-900 mb-2 sm:mb-4",
@@ -99,10 +99,10 @@ export const landingPageStyles = {
 
   // CTA section
   ctaSection: "py-16 sm:py-24",
-  ctaContainer: "max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex justify-center items-center",
+  ctaContainer: "max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center",
   ctaCard: "relative",
-  ctaCardBg: "-inset-6 sm:-inset-8 bg-gradient-to-r from-violet-200/50 to-fuchsia-200/50 rounded-3xl",
-  ctaCardContent: "mx-auto bg-gradient-to-br from-white to-violet-50 border border-violet-100 rounded-3xl p-8 sm:p-16",
+  ctaCardBg: "absolute -inset-6 sm:-inset-8 bg-gradient-to-r from-violet-200/50 to-fuchsia-200/50 rounded-3xl blur-3xl",
+  ctaCardContent: "relative bg-gradient-to-br from-white to-violet-50 border border-violet-100 rounded-3xl p-8 sm:p-16",
   ctaTitle: "text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 mb-4 sm:mb-6",
   ctaTitleGradient: "bg-gradient-to-r from-violet-600 to-fuchsia-600 bg-clip-text text-transparent",
   ctaDescription: "text-base sm:text-lg text-slate-600 mb-6 sm:mb-10 max-w-2xl mx-auto font-medium",

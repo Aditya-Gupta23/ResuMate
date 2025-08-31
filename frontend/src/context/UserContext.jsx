@@ -11,7 +11,7 @@ const UserProvider = ({children}) => {
     useEffect(() => {
         if (user)   return;
 
-        const accessToken = localStorage.getItem('token');
+        const accessToken = localStorage.getItem('accessToken');
         if(!accessToken) {
             setLoading(false);
             return;
@@ -30,19 +30,31 @@ const UserProvider = ({children}) => {
         fetchUser();
     }, []);
 
-    const updateUser = (userData) => {
-        setUser(userData);
-        localStorage.setItem('token', userData.token);
+    const updateUser = ({ user, accessToken }) => {
+        setUser(user);
+        localStorage.setItem('accessToken', accessToken);
         setLoading(false);
-    }
-    
+    };
+
     const clearUser = () => {
         setUser(null);
-        localStorage.removeItem('token');
-    }
+        localStorage.removeItem('accessToken');
+    };
+
+    const logoutUser = async () => {
+        try {
+            await axiosInstance.post(API_PATHS.AUTH.LOGOUT, {}, { withCredentials: true });
+        } catch (error) {
+            console.error("Logout failed:", error);
+        } finally {
+            localStorage.removeItem("accessToken"); // clear client token
+            setUser(null);                          // reset React state
+            window.location.href = "/login";        // redirect
+        }
+    };
 
     return (
-        <UserContext.Provider value={{user, loading, updateUser, clearUser}}>
+        <UserContext.Provider value={{user, loading, updateUser, clearUser, logoutUser}}>
             {children}
         </UserContext.Provider>
     );

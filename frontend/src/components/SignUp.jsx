@@ -1,7 +1,6 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { authStyles } from "../assets/dummystyle";
-import { UserContext } from "../context/UserContext";
 import { validateEmail } from "../utils/helper";
 import axiosInstance from "../utils/axiosInstance";
 import { API_PATHS } from "../utils/apiPaths";
@@ -13,7 +12,6 @@ const SignUp = ({setCurrentPage}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
-    const { updateUser } = useContext(UserContext);
     const navigate = useNavigate();
 
     const handleSignUp = async (event) => {
@@ -38,11 +36,12 @@ const SignUp = ({setCurrentPage}) => {
                 email,
                 password
             });
-            const {token} = response.data;
-            if(token) {
-                updateUser(response.data);
-                navigate('/dashboard');
+            
+            if (response.status === 201) {
+                // redirect to OTP verification page, pass email
+                navigate("/verify-otp", { state: { email } });
             }
+            
         } catch(error) {
             setError(error.response?.data?.message || 'Something went wrong. Please try again later.');
         }

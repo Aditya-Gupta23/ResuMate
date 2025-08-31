@@ -1,11 +1,16 @@
-export const BASE_URL = 'http://localhost:4000'
+export const BASE_URL = 'http://localhost:5050';
 
 // ROUTES Used for Frontend
 export const API_PATHS = {
     AUTH: {
-        REGISTER: '/api/auth/register',
-        LOGIN: '/api/auth/login',
-        GET_PROFILE: '/api/auth/profile'
+        REGISTER: '/api/v1/auth/signup',
+        LOGIN: '/api/v1/auth/login',
+        LOGOUT: '/api/v1/auth/logout',
+        REFRESH: '/api/v1/auth/refresh',
+        GOOGLE_LOGIN: '/api/v1/auth/google',
+        VERIFY_OTP: '/api/v1/auth/verify-otp',
+        RESEND_OTP: '/api/v1/auth/resend-otp',
+        GET_PROFILE: '/api/v1/auth/me'
     }, 
     RESUME: {
         CREATE: '/api/resume',
@@ -17,6 +22,6 @@ export const API_PATHS = {
         UPLOAD_IMAGES: (id) => `/api/resume/${id}/upload-images`
     },
     image: {
-        UPLOAD_IMAGE: 'api/auth/upload-image'
+        UPLOAD_IMAGE: '/api/auth/upload-image'
     }
 }

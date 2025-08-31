@@ -6,7 +6,7 @@ import axiosInstance from "../utils/axiosInstance";
 import { API_PATHS } from "../utils/apiPaths";
 import { authStyles } from "../assets/dummystyle";
 import { Input } from "./inputs";
-
+import { GoogleLogin } from "@react-oauth/google";
 
 const Login = ({setCurrentPage}) => {
 
@@ -31,11 +31,12 @@ const Login = ({setCurrentPage}) => {
 
         try {
             const response = await axiosInstance.post(API_PATHS.AUTH.LOGIN, {email, password});
-            const {token} = response.data;
-            if(token) {
-                updateUser(response.data);
+            const { accessToken, user } = response.data;
+            if (accessToken) {
+                updateUser({ user, accessToken });
                 navigate('/dashboard');
             }
+
         } catch(error) {
             setError(error.response?.data?.message || 'Something went wrong. Please try again later.');
         }
@@ -65,6 +66,36 @@ const Login = ({setCurrentPage}) => {
                 <button type="submit" className={authStyles.submitButton}>
                     Sign In
                 </button>
+
+                {/* Google Button */}
+                <div className="mt-2 flex flex-col items-center rounded-2xl">
+                    <GoogleLogin
+                        onSuccess={async (credentialResponse) => {
+                            try {
+                                const token = credentialResponse.credential;
+
+                                // send token to backend
+                                const response = await axiosInstance.post(API_PATHS.AUTH.GOOGLE_LOGIN, {
+                                    id_token: token,
+                                });
+
+                                const { accessToken, user } = response.data;
+                                if (accessToken) {
+                                    updateUser({ ...user, accessToken });
+                                    navigate("/dashboard");
+                                }
+                            } catch (error) {
+                                setError("Google login failed. Please try again.", error);
+                            }
+                        }}
+                        onError={() => setError("Google login failed.")}
+                        theme="outline"   // "outline", "filled_blue", "filled_black"
+                        size="large"          // "small", "medium", "large"
+                        shape="circle"          // "rectangular", "pill", "circle", "square"
+                        text="continue_with"    // "signin", "signup", "continue_with", "signin_with"
+                    />
+                </div>
+
 
                 {/* Footer */}
                 <p className={authStyles.switchText}>

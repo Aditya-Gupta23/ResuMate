@@ -218,56 +218,55 @@ export default function LandingPage() {
                 <section className={landingPageStyles.featuresSection}>
                     <div className={landingPageStyles.featuresContainer}>
                         <div className={landingPageStyles.featuresHeader}>
-                            <h1 className={landingPageStyles.featuresTitle}>
+                            <h2 className={landingPageStyles.featuresTitle}>
                                 Why Choose <span className={landingPageStyles.featuresTitleGradient}>
                                     ResuMate?
                                 </span>
-                            </h1>
+                            </h2>
                             <p className={landingPageStyles.featuresDescription}>
                                 Everything you need to create a professional resume that stands out
                             </p>
                         </div>
-                    </div>
-
-                    <div className={landingPageStyles.featuresGrid}>
-                        {[
-                            {
-                                icon: <Zap className={landingPageStyles.featureIcon} />,
-                                title: "Lightning Fast",
-                                description: "Create professional resumes in under 5 minutes with our streamlined process",
-                                gradient: landingPageStyles.featureIconViolet,
-                                bg: landingPageStyles.featureCardViolet
-                            },
-                            {
-                                icon: <LayoutTemplate className={landingPageStyles.featureIcon} />,
-                                title: "Pro Templates",
-                                description: "Choose from dozens of recruiter-approved, industry-specific templates",
-                                gradient: landingPageStyles.featureIconFuchsia,
-                                bg: landingPageStyles.featureCardFuchsia
-                            },
-                            {
-                                icon: <Download className={landingPageStyles.featureIcon} />,
-                                title: "Instant Export",
-                                description: "Download high-quality PDFs instantly with perfect formatting",
-                                gradient: landingPageStyles.featureIconOrange,
-                                bg: landingPageStyles.featureCardOrange
-                            }
-                        ].map((feature, idx) => (
-                            <div key={idx} className={landingPageStyles.featureCard}>
-                                <div className={landingPageStyles.featureCardHover}></div>
-                                <div className={`${landingPageStyles.featureCardContent} ${feature.bg}`}>
-                                    <div className={`${landingPageStyles.featureIconContainer} ${feature.gradient}`}>
-                                        {feature.icon}
+                        <div className={landingPageStyles.featuresGrid}>
+                            {[
+                                {
+                                    icon: <Zap className={landingPageStyles.featureIcon} />,
+                                    title: "Lightning Fast",
+                                    description: "Create professional resumes in under 5 minutes with our streamlined process",
+                                    gradient: landingPageStyles.featureIconViolet,
+                                    bg: landingPageStyles.featureCardViolet
+                                },
+                                {
+                                    icon: <LayoutTemplate className={landingPageStyles.featureIcon} />,
+                                    title: "Pro Templates",
+                                    description: "Choose from dozens of recruiter-approved, industry-specific templates",
+                                    gradient: landingPageStyles.featureIconFuchsia,
+                                    bg: landingPageStyles.featureCardFuchsia
+                                },
+                                {
+                                    icon: <Download className={landingPageStyles.featureIcon} />,
+                                    title: "Instant Export",
+                                    description: "Download high-quality PDFs instantly with perfect formatting",
+                                    gradient: landingPageStyles.featureIconOrange,
+                                    bg: landingPageStyles.featureCardOrange
+                                }
+                            ].map((feature, idx) => (
+                                <div key={idx} className={landingPageStyles.featureCard}>
+                                    <div className={landingPageStyles.featureCardHover}></div>
+                                    <div className={`${landingPageStyles.featureCardContent} ${feature.bg}`}>
+                                        <div className={`${landingPageStyles.featureIconContainer} ${feature.gradient}`}>
+                                            {feature.icon}
+                                        </div>
+                                        <h3 className={landingPageStyles.featureTitle}>
+                                            {feature.title}
+                                        </h3>
+                                        <p className={landingPageStyles.featureDescription}>
+                                            {feature.description}
+                                        </p>
                                     </div>
-                                    <h3 className={landingPageStyles.featureTitle}>
-                                        {feature.title}
-                                    </h3>
-                                    <p className={landingPageStyles.featureDescription}>
-                                        {feature.description}
-                                    </p>
                                 </div>
-                            </div>
-                        ))}
+                            ))}
+                        </div>
                     </div>
                 </section>
 
@@ -275,23 +274,22 @@ export default function LandingPage() {
                 <section className={landingPageStyles.ctaSection}>
                     <div className={landingPageStyles.ctaContainer}>
                         <div className={landingPageStyles.ctaCard}>
-                            <div className={landingPageStyles.ctaCardBg}>
-                                <div className={landingPageStyles.ctaCardContent}>
-                                    <h2 className={landingPageStyles.ctaTitle}>
-                                        Ready to Build Your <span className={landingPageStyles.ctaTitleGradient}>
-                                            Standout Resume?
-                                        </span>
-                                    </h2>
-                                    <p className={landingPageStyles.ctaDescription}>
-                                        Join Thousands of professionals who landed their dream job with our plateform
-                                    </p>
-                                    <button className={landingPageStyles.ctaButton}>
-                                        <div className={landingPageStyles.ctaButtonOverlay}></div>
-                                        <span className={landingPageStyles.ctaButtonText}>
-                                            Start Building now
-                                        </span>
-                                    </button>
-                                </div>
+                            <div className={landingPageStyles.ctaCardBg}></div>
+                            <div className={landingPageStyles.ctaCardContent}>
+                                <h2 className={landingPageStyles.ctaTitle}>
+                                    Ready to Build Your <span className={landingPageStyles.ctaTitleGradient}>
+                                        Standout Resume?
+                                    </span>
+                                </h2>
+                                <p className={landingPageStyles.ctaDescription}>
+                                    Join thousands of professionals who landed their dream jobs with our platform
+                                </p>
+                                <button className={landingPageStyles.ctaButton}>
+                                    <div className={landingPageStyles.ctaButtonOverlay}></div>
+                                    <span className={landingPageStyles.ctaButtonText}>
+                                        Start Building Now
+                                    </span>
+                                </button>
                             </div>
                         </div>
                     </div>

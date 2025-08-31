@@ -8,7 +8,6 @@ import { cardStyles } from "../assets/dummystyle";
 export const ProfileInfoCard = () => {
     const navigate = useNavigate();
     const {user, clearUser} = useContext(UserContext);
-
     const handleLogout = () => {
         localStorage.clear();
         clearUser(null);
@@ -20,12 +19,12 @@ export const ProfileInfoCard = () => {
             <div className={cardStyles.profileCard}>
                 <div className={cardStyles.profileInitialsContainer}>
                     <span className={cardStyles.profileInitialsText}>
-                        {user.name ? user.name.charAt(0).toUpperCase() : ""}
+                        {user?.user?.name ? user.user.name.charAt(0).toUpperCase() : ""}
                     </span>
                 </div>
                 <div>
                     <div className={cardStyles.profileName}>
-                        {user.name || ""}
+                        {user?.user?.name || ""}
                     </div>
                     <button className={cardStyles.logoutButton} onClick={handleLogout}>
                         Logout
