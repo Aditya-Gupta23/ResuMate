@@ -1,8 +1,8 @@
 import fs from 'fs';
 import path from 'path';
-import Resume from '../models/resumeModel.js';
-import upload from '../middleware/uploadMiddleware.js';
-import { error } from 'console';
+import Resume from '../models/resume.model.js';
+import upload from '../middleware/uploads.middleware.js';
+
 
 export const uploadResumeImages = async (req, res) => {
     try {

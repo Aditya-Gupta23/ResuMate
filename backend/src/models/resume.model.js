@@ -1,10 +1,10 @@
-import mongoose, { mongoose } from "mongoose";
-import { User } from "./user.model";
+import  { mongoose } from "mongoose";
+import { User } from "./user.model.js";
 
 
 const resumeSchema=new mongoose.Schema({
     userId:{
-        type:mongoose.Schema.Type.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref:User,
         required:true
     },

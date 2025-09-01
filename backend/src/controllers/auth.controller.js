@@ -214,8 +214,9 @@ export const login=async (req,res)=>{
 }
 
 export const me=async(req,res)=>{
+  console.log("Req.User",req.user)
   try {
-    const user=await User.findById(req.userId).select("_id name email isVerified createdAt updatedAt");
+    const user=await User.findById(req.user._id).select("_id name email isVerified createdAt updatedAt");
     if (!user) return res.status(404).json({ message: "User not found" });
     return res.json({ user });
   } catch (error) {
