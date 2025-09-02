@@ -81,13 +81,12 @@ export const createReusme=async (req,res)=>{
 
 export const getUserResumes=async(req,res)=>{
     try {
-        const resume=await Resumes.findOne({userId:req.user._id}).sort({
+        const resumes=await Resumes.find({userId:req.user._id}).sort({
             updatedAt:-1
         })
-        res.json(resume)
+        res.json(resumes || []);
     } catch (error) {
-        return res.status(500).json({message:"Failed to find resume"})
-
+        return res.status(500).json({message:"Failed to find resume"});
     }
 }
 
@@ -103,7 +102,7 @@ export const getResumeById=async(req,res)=>{
 
 export const updateResume=async(req,res)=>{
     try {
-        const resume=await Resume.findOne({
+        const resume=await Resumes.findOne({
             _id:req.params.id,
             userId:req.user._id
         })
@@ -120,7 +119,7 @@ export const updateResume=async(req,res)=>{
 
 export const deleteResume=async(req,res)=>{
     try {
-        const resume=await Resume.findOne({
+        const resume=await Resumes.findOne({
             _id:req.params.id,
             userId:req.user._id
         })
@@ -144,7 +143,7 @@ export const deleteResume=async(req,res)=>{
                 fs.unlinkSync(oldProfile)
             }
         }
-        const deleted=Resumes.findOneAndDelete({
+        const deleted=await Resumes.findOneAndDelete({
             _id:req.params.id,
             userId:req.user._id
         })

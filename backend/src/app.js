@@ -18,6 +18,19 @@ app.use(cors({
     credentials:true
 }))
 // app.use(cors())
+
+// app.use((req, res, next) => {
+//   res.setHeader("Cross-Origin-Opener-Policy", "same-origin-allow-popups");
+//   res.setHeader("Cross-Origin-Embedder-Policy", "unsafe-none"); // safe for dev
+//   next();
+// });
+
+app.use((req, res, next) => {
+  res.removeHeader("Cross-Origin-Opener-Policy");
+  res.removeHeader("Cross-Origin-Embedder-Policy");
+  next();
+});
+
 app.use(express.json())
 app.use(cookieParser())
 app.use(morgan("dev"))
