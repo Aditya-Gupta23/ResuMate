@@ -7,7 +7,7 @@ import upload from '../middleware/uploads.middleware.js';
 export const uploadResumeImages = async (req, res) => {
     try {
         // Configure multer to handle images
-        upload.fields([{name: "thumbnail"}, {name: "profileImage"}]);
+        upload.fields([{name: "thumbnail"}, {name: "profileImage"}])
         (req, res, async (error) => {
             if(error) {
                 return res.status(400).json({message: "File upload failed", error: error.message});

@@ -123,14 +123,14 @@ export const deleteResume=async(req,res)=>{
             _id:req.params.id,
             userId:req.user._id
         })
-        if(!resume) return res(404).json({message:"Resume not found or aurthorized"});
+        if(!resume) return res.status(404).json({message:"Resume not found or aurthorized"});
 
         const uploadsFolder=path.join(process.cwd(),'uploads');
 
         if(resume.thumbnailLink){
             const oldThumbnail=path.join(uploadsFolder,path.basename(resume.thumbnailLink))
             if(fs.existsSync(oldThumbnail)){
-                fs.unlink(oldThumbnail)
+                fs.unlinkSync(oldThumbnail)
             }
         }
 
