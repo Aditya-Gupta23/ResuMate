@@ -3,7 +3,16 @@ import { UserContext } from '../context/UserContext';
 import Navbar from "./Navbar";
 
 const DashBoardLayout = ({activeMenu, children}) => {
-    const {user} = useContext(UserContext);
+    const {user, loading} = useContext(UserContext);
+
+    if (loading) {
+        return (
+            <div>
+                <Navbar activeMenu={activeMenu} />
+                <div className="flex justify-center items-center h-40">Loading...</div>
+            </div>
+        );
+    }
 
     return (
         <div>

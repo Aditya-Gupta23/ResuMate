@@ -1,11 +1,11 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import { validateEmail } from "../utils/helper";
 import axiosInstance from "../utils/axiosInstance";
 import { API_PATHS } from "../utils/apiPaths";
 import { authStyles } from "../assets/dummystyle";
-import { Input } from "./inputs";
+import { Input } from "./Inputs";
 import { GoogleLogin } from "@react-oauth/google";
 
 const Login = ({setCurrentPage}) => {
@@ -13,7 +13,7 @@ const Login = ({setCurrentPage}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
-    const { updateUser } = useContext(UserContext);
+    const { updateUser, user } = useContext(UserContext);
     const navigate = useNavigate();
 
     const handleLogin = async (event) => {
@@ -34,13 +34,18 @@ const Login = ({setCurrentPage}) => {
             const { accessToken, user } = response.data;
             if (accessToken) {
                 updateUser({ user, accessToken });
-                navigate('/dashboard');
             }
 
         } catch(error) {
             setError(error.response?.data?.message || 'Something went wrong. Please try again later.');
         }
     }
+
+    useEffect(() => {
+        if (user) {
+            navigate("/dashboard");
+        }
+    }, [user, navigate]);
 
     return (
         <div className={authStyles.container}>
@@ -70,6 +75,7 @@ const Login = ({setCurrentPage}) => {
                 {/* Google Button */}
                 <div className="mt-2 flex flex-col items-center rounded-2xl">
                     <GoogleLogin
+                        clientId = {import.meta.env.VITE_GOOGLE_CLIENT_ID}
                         onSuccess={async (credentialResponse) => {
                             try {
                                 const token = credentialResponse.credential;
@@ -81,8 +87,7 @@ const Login = ({setCurrentPage}) => {
 
                                 const { accessToken, user } = response.data;
                                 if (accessToken) {
-                                    updateUser({ ...user, accessToken });
-                                    navigate("/dashboard");
+                                    updateUser({ user, accessToken });
                                 }
                             } catch (error) {
                                 setError("Google login failed. Please try again.", error);

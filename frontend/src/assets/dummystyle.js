@@ -118,6 +118,50 @@ export const landingPageStyles = {
   footerLink: "hover:text-purple-400 underline"
 };
 
+export const dashboardStyles = {
+  // Container
+  container: "container mx-auto px-4 py-6",
+
+  // Header
+  headerWrapper: "flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6",
+  headerTitle: "text-2xl font-bold text-gray-900",
+  headerSubtitle: "text-gray-600",
+
+  // Create Button
+  createButton: "group relative px-10 py-4 bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white font-bold rounded-2xl overflow-hidden transition-all hover:scale-105 hover:shadow-2xl hover:shadow-violet-200",
+  createButtonOverlay: "absolute inset-0 bg-gradient-to-r from-fuchsia-600 to-orange-500 opacity-0 group-hover:opacity-100 transition-opacity",
+  createButtonContent: "relative flex items-center gap-3",
+
+  // Loading
+  spinnerWrapper: "flex justify-center items-center py-12",
+  spinner: "animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-violet-600",
+
+  // Empty State
+  emptyStateWrapper: "flex flex-col items-center justify-center py-12 text-center",
+  emptyIconWrapper: "bg-violet-100 p-4 rounded-full mb-4",
+  emptyTitle: "text-xl font-bold text-gray-900 mb-2",
+  emptyText: "text-gray-600 max-w-md mb-6",
+
+  // Grid
+  grid: "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6",
+
+  // New Resume Card
+  newResumeCard: "flex flex-col items-center justify-center bg-gradient-to-br from-violet-50 to-blue-50 border-2 border-dashed border-violet-300 rounded-2xl p-6 cursor-pointer transition-all hover:shadow-lg hover:border-violet-500 h-full",
+  newResumeIcon: "w-16 h-16 rounded-full bg-gradient-to-r from-violet-600 to-fuchsia-600 flex items-center justify-center mb-4",
+  newResumeTitle: "text-xl font-bold text-gray-900 mb-2 text-center",
+  newResumeText: "text-gray-600 text-center",
+
+  // Modal
+  modalHeader: "flex justify-between items-center mb-4",
+  modalTitle: "text-xl font-bold text-gray-900",
+  modalCloseButton: "text-gray-500 hover:text-gray-700",
+
+  // Delete Confirmation
+  deleteIconWrapper: "bg-red-100 p-3 rounded-full mb-4",
+  deleteTitle: "text-lg font-bold text-gray-900 mb-2",
+  deleteText: "text-gray-600 mb-4",
+};
+
 export const cardStyles = {
   // ProfileInfoCard styles
   profileCard: "flex items-center gap-3 p-2 sm:p-3 bg-white backdrop-blur-xl border border-gray-200 rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 hover:scale-[1.03]",
@@ -199,6 +243,151 @@ export const authStyles = {
   signupSwitchButton: "font-black text-rose-600 hover:text-pink-600 transition-colors"
 };
 
+export const shimmerStyle = `
+  @keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+  
+  @keyframes flow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  
+  @keyframes bubble {
+    0% { transform: translateY(0) scale(1); opacity: 0.7; }
+    50% { transform: translateY(-10px) scale(1.1); opacity: 0.9; }
+    100% { transform: translateY(0) scale(1); opacity: 0.7; }
+  }
+  
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 20px rgba(139, 92, 246, 0.3); }
+    50% { box-shadow: 0 0 40px rgba(139, 92, 246, 0.6); }
+  }
+  
+  .animate-shimmer {
+    animation: shimmer 2s infinite;
+  }
+  
+  .animate-flow {
+    animation: flow 4s infinite linear;
+  }
+  
+  .animate-bubble {
+    animation: bubble 2s infinite ease-in-out;
+  }
+  
+  .animate-pulse-glow {
+    animation: pulse-glow 2s infinite;
+  }
+`
+// Common Styles
+export const commonStyles = {
+  trashButton: "absolute top-4 right-4 p-2 text-red-500 hover:bg-red-50 rounded-xl transition-all",
+  addButtonBase: "flex items-center gap-3 px-6 py-3 text-white font-bold rounded-xl hover:scale-105 transition-all shadow-lg",
+};
+
+// AdditionalInfoForm Styles
+export const additionalInfoStyles = {
+  container: "p-8 bg-gradient-to-br from-white to-violet-50",
+  heading: "text-2xl font-black text-slate-900 mb-8",
+  sectionHeading: "text-lg font-bold text-slate-800 mb-6 flex items-center gap-2",
+  dotViolet: "w-2 h-2 bg-gradient-to-r from-violet-500 to-fuchsia-500 rounded-full",
+  dotOrange: "w-2 h-2 bg-gradient-to-r from-orange-500 to-red-500 rounded-full",
+  languageItem: "relative bg-white border border-violet-100 p-6 rounded-2xl shadow-sm hover:shadow-lg transition-all",
+  interestItem: "relative",
+  addButtonLanguage: "bg-gradient-to-r from-violet-500 to-fuchsia-500",
+  addButtonInterest: "bg-gradient-to-r from-orange-500 to-red-500",
+};
+
+// CertificationInfoForm Styles
+export const certificationInfoStyles = {
+  container: "p-8 bg-gradient-to-br from-white to-emerald-50",
+  heading: "text-2xl font-black text-slate-900 mb-8",
+  item: "relative bg-white border border-emerald-100 p-6 rounded-2xl shadow-sm hover:shadow-lg transition-all",
+  addButton: "bg-gradient-to-r from-emerald-500 to-teal-500",
+};
+
+// ContactInfoForm Styles
+export const contactInfoStyles = {
+  container: "p-8 bg-gradient-to-br from-white to-blue-50",
+  heading: "text-2xl font-black text-slate-900 mb-8",
+};
+
+// EducationDetailsForm Styles
+export const educationDetailsStyles = {
+  container: "p-8 bg-gradient-to-br from-white to-indigo-50",
+  heading: "text-2xl font-black text-slate-900 mb-8",
+  item: "relative bg-white border border-indigo-100 p-6 rounded-2xl shadow-sm hover:shadow-lg transition-all",
+  addButton: "bg-gradient-to-r from-indigo-500 to-purple-500",
+};
+
+// ProfileInfoForm Styles
+export const profileInfoStyles = {
+  container: "p-8 bg-gradient-to-br from-white to-rose-50",
+  heading: "text-2xl font-black text-slate-900 mb-8",
+  textarea: "w-full p-4 bg-white border border-rose-200 rounded-xl focus:border-rose-400 focus:ring-4 focus:ring-rose-50 transition-all outline-none resize-none",
+};
+
+// ProjectDetailForm Styles
+export const projectDetailStyles = {
+  container: "p-8 bg-gradient-to-br from-white to-cyan-50",
+  heading: "text-2xl font-black text-slate-900 mb-8",
+  item: "relative bg-white border border-cyan-100 p-6 rounded-2xl shadow-sm hover:shadow-lg transition-all",
+  textarea: "w-full p-4 bg-white border border-cyan-200 rounded-xl focus:border-cyan-400 focus:ring-4 focus:ring-cyan-50 transition-all outline-none resize-none",
+  addButton: "bg-gradient-to-r from-cyan-500 to-blue-500",
+};
+
+// SkillsInfoForm Styles
+export const skillsInfoStyles = {
+  container: "p-8 bg-gradient-to-br from-white to-amber-50",
+  heading: "text-2xl font-black text-slate-900 mb-8",
+  item: "relative bg-white border border-amber-100 p-6 rounded-2xl shadow-sm hover:shadow-lg transition-all",
+  addButton: "bg-gradient-to-r from-amber-500 to-orange-500",
+};
+
+// WorkExperienceForm Styles
+export const workExperienceStyles = {
+  container: "p-8 bg-gradient-to-br from-white to-green-50",
+  heading: "text-2xl font-black text-slate-900 mb-8",
+  item: "relative bg-white border border-green-100 p-6 rounded-2xl shadow-sm hover:shadow-lg transition-all",
+  textarea: "w-full p-4 bg-white border border-green-200 rounded-xl focus:border-green-400 focus:ring-4 focus:ring-green-50 transition-all outline-none resize-none",
+  addButton: "bg-gradient-to-r from-green-500 to-emerald-500",
+};
+
+export const containerStyles = {
+  main: "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6",
+  header: "flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-gradient-to-r from-white to-violet-50 border border-violet-100 rounded-2xl py-4 px-6 mb-6 shadow-sm",
+  grid: "grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8",
+  formContainer: "bg-white border border-violet-100 rounded-2xl overflow-hidden shadow-sm",
+  previewContainer: "bg-white border border-violet-100 rounded-2xl overflow-hidden shadow-sm p-4",
+  previewInner: "w-full max-w-[800px] mx-auto",
+  modalContent: "w-[90vw] h-[80vh]",
+  pdfPreview: "w-full p-4 flex justify-center",
+  hiddenThumbnail: "bg-white shadow-lg max-w-[400px] mx-auto"
+};
+
+export const buttonStyles = {
+  theme: "flex items-center gap-2 px-3 sm:px-4 py-2 bg-violet-100 text-violet-700 font-bold rounded-xl hover:bg-violet-200 transition-all",
+  delete: "flex items-center gap-2 px-3 sm:px-4 py-2 bg-red-100 text-red-700 font-bold rounded-xl hover:bg-red-200 transition-all",
+  download: "flex items-center gap-2 px-3 sm:px-4 py-2 bg-emerald-100 text-emerald-700 font-bold rounded-xl hover:bg-emerald-200 transition-all",
+  back: "flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-3 bg-gray-100 text-gray-700 font-bold rounded-xl hover:bg-gray-200 transition-all text-sm",
+  save: "flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-3 bg-blue-100 text-blue-700 font-bold rounded-xl hover:bg-blue-200 transition-all text-sm",
+  next: "flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white font-bold rounded-xl hover:scale-105 transition-all shadow-lg text-sm",
+  modalAction: "flex items-center gap-2 px-4 sm:px-6 py-2 sm:py-3 bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white font-bold rounded-xl hover:scale-105 transition-all shadow-lg text-sm"
+};
+
+export const statusStyles = {
+  completionBadge: "inline-flex items-center gap-2 bg-gray-100 px-3 py-1 rounded-full text-sm font-medium text-gray-700",
+  modalBadge: "inline-flex items-center gap-2 bg-violet-100 px-3 py-1 rounded-full text-sm font-medium text-violet-700",
+  error: "flex items-center gap-3 text-sm font-medium text-amber-700 bg-amber-50 border border-amber-200 px-4 py-3 rounded-xl mb-4"
+};
+
+export const iconStyles = {
+  pulseDot: "w-2 h-2 rounded-full bg-emerald-500 animate-pulse"
+};
+
 export const inputStyles = {
   wrapper: "mb-6 group",
   label: "block text-sm font-bold text-gray-800 mb-3 group-focus-within:text-violet-600 transition-colors",
@@ -209,6 +398,27 @@ export const inputStyles = {
   toggleButton: "text-gray-500 hover:text-violet-600 transition-colors p-1 rounded-lg hover:bg-gray-100",
 };
 
+export const photoSelectorStyles = {
+  container: "flex justify-center mb-8",
+  hiddenInput: "hidden",
+  placeholder: hovered => `relative w-32 h-32 sm:w-36 sm:h-36 flex items-center justify-center bg-gray-50 border-2 border-dashed border-gray-300 rounded-full cursor-pointer transition-all duration-300 ${hovered ? 'hover:border-violet-500 hover:bg-violet-50' : ''}`,
+  cameraButton: "absolute -bottom-2 -right-2 w-12 h-12 flex items-center justify-center bg-gradient-to-r from-violet-500 to-fuchsia-500 hover:from-violet-600 hover:to-fuchsia-600 text-white rounded-full transition-all shadow-lg hover:scale-110",
+  previewWrapper: "relative group",
+  previewImageContainer: hovered => `w-32 h-32 sm:w-36 sm:h-36 rounded-full overflow-hidden border-4 border-gray-200 shadow-lg transition-all duration-300 ${hovered ? 'group-hover:border-violet-400' : ''}`,
+  previewImage: "w-full h-full object-cover cursor-pointer group-hover:scale-110 transition-transform duration-300",
+  overlay: "absolute inset-0 bg-black/30 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center",
+  actionButton: (bg, hoverBg, textColor) => `w-10 h-10 flex items-center justify-center bg-${bg} text-${textColor} rounded-full hover:bg-${hoverBg} transition-all`,
+};
+
+export const titleInputStyles = {
+  container: "flex items-center gap-3",
+  titleText: "text-lg sm:text-xl font-bold text-gray-800",
+  editButton: "p-2 rounded-xl bg-gray-100 hover:bg-gray-200 transition-all group",
+  editIcon: "w-5 h-5 text-gray-600 group-hover:text-violet-600 transition-colors",
+  inputField: focused => `text-lg sm:text-xl font-bold bg-transparent outline-none text-gray-800 border-b-2 pb-2 transition-all duration-300 ${focused ? 'border-violet-500' : 'border-gray-300'}`,
+  confirmButton: "p-2 rounded-xl bg-violet-500 hover:bg-violet-600 text-white transition-all",
+};
+
 export const modalStyles = {
   overlay: "fixed inset-0 flex items-center justify-center w-full h-full bg-black/60 backdrop-blur-sm z-50",
   container: "relative flex flex-col bg-white/95 backdrop-blur-xl shadow-2xl rounded-3xl overflow-hidden border border-violet-100 max-w-[95vw] max-h-[95vh]",
@@ -217,4 +427,61 @@ export const modalStyles = {
   actionButton: "flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white font-bold rounded-xl hover:scale-105 transition-all shadow-lg mr-12",
   closeButton: "absolute top-4 right-4 w-10 h-10 flex items-center justify-center bg-white/80 hover:bg-red-50 text-slate-400 hover:text-red-500 rounded-xl transition-all shadow-lg hover:scale-110 z-10",
   body: "flex-1 overflow-y-auto"
+};
+
+export const infoStyles = {
+  // Progress
+  progressWrapper: "w-20 h-2 rounded-full bg-gray-200",
+  progressBar: color => `h-full rounded-full transition-all`,
+
+  // ActionLink
+  actionWrapper: "flex items-center gap-3",
+  actionIconWrapper: "w-6 h-6 flex items-center justify-center rounded-full",
+  actionLink: "text-sm font-medium underline cursor-pointer break-all text-gray-600 hover:text-emerald-600 transition-colors",
+
+  // CertificationInfo
+  certContainer: "mb-4",
+  certTitle: "text-base font-semibold text-gray-900",
+  certRow: "flex items-center gap-2 mt-1",
+  certYear: bgColor => `text-xs font-bold text-white px-3 py-1 rounded-lg`,
+  certIssuer: "text-sm text-gray-600 font-medium",
+
+  // ContactInfo
+  contactRow: "flex items-center gap-3 mb-3",
+  contactIconWrapper: "w-8 h-8 flex items-center justify-center rounded-lg",
+  contactText: "flex-1 text-sm font-medium break-all text-gray-700",
+
+  // EducationInfo
+  eduContainer: "mb-5",
+  eduDegree: "text-base font-semibold pb-2 text-gray-900",
+  eduInstitution: "text-sm text-gray-700 font-medium",
+  eduDuration: "text-xs text-gray-500 font-medium italic mt-1",
+
+  // Language/Skill Info
+  infoRow: "flex items-center justify-between mb-3",
+  infoLabel: "text-sm font-semibold text-gray-900",
+
+  // Links
+  linkRow: "flex items-center space-x-1 hover:text-blue-600",
+
+  // ProjectInfo
+  projectContainer: "mb-5",
+  projectTitle: isPreview => `${isPreview ? 'text-sm' : 'text-base'} font-semibold text-gray-900`,
+  projectDesc: "text-sm text-gray-600 mt-1 leading-relaxed",
+  projectLinks: "flex items-center gap-4 font-medium mt-3",
+
+  // RatingInput
+  ratingWrapper: "flex gap-2 cursor-pointer",
+  ratingDot: "w-4 h-4 rounded transition-all hover:scale-110",
+
+  // SkillSection
+  skillGrid: "grid grid-cols-2 gap-x-6 gap-y-2 mb-5",
+
+  // WorkExperience
+  workContainer: "mb-6",
+  workHeader: "flex items-start justify-between mb-2",
+  workCompany: "text-base font-semibold pb-2 text-gray-900",
+  workRole: "text-base font-medium text-gray-700",
+  workDuration: color => `text-sm font-bold italic`,
+  workDesc: "text-sm text-gray-600 font-medium leading-relaxed"
 };
