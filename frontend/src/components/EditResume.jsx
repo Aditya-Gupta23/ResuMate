@@ -3,7 +3,7 @@ import { buttonStyles, containerStyles, iconStyles, statusStyles } from "../asse
 import DashBoardLayout from "./DashboardLayout";
 import { TitleInput } from "./Inputs";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { AlertCircle, ArrowLeft, Check, Download, Loader2, Palette, Save, Trash2 } from "lucide-react";
+import { AlertCircle, ArrowLeft, ArrowRight, Check, Download, Loader2, Palette, Save, Trash2 } from "lucide-react";
 import axiosInstance from "../utils/axiosInstance";
 import { API_PATHS } from "../utils/apiPaths";
 import toast from "react-hot-toast";
@@ -25,6 +25,7 @@ import RenderResume from "./RenderResume";
 import ThemeSelector from "./ThemeSelector";
 import Modal from "./Modal";
 import { dataURLtoFile } from "../utils/helper";
+import { motion, AnimatePresence } from "framer-motion";
 
 // Resize observer hook
 const useResizeObserver = () => {
@@ -198,7 +199,9 @@ const EditResume = () => {
         totalFields += resumeData.interests.length;
         completedFields += resumeData.interests.filter(i => i.trim() !== "").length;
 
-        const percentage = Math.round((completedFields / totalFields) * 100);
+        const percentage = totalFields > 0 
+            ? Math.round((completedFields / totalFields) * 100) 
+            : 0;
         setCompletionPercentage(percentage);
         return percentage;
     };
@@ -214,15 +217,15 @@ const EditResume = () => {
         switch (currentPage) {
             case "profile-info":
                 const { fullName, designation, summary } = resumeData.profileInfo;
-                if (!fullName.trim()) errors.push("Full Name is required");
-                if (!designation.trim()) errors.push("Designation is required");
-                if (!summary.trim()) errors.push("Summary is required");
+                if (!fullName || !fullName.trim()) errors.push("Full Name is required");
+                if (!designation || !designation.trim()) errors.push("Designation is required");
+                if (!summary || !summary.trim()) errors.push("Summary is required");
                 break;
 
             case "contact-info":
                 const { email, phone } = resumeData.contactInfo;
-                if (!email.trim() || !/^\S+@\S+\.\S+$/.test(email)) errors.push("Valid email is required.");
-                if (!phone.trim() || !/^\d{10}$/.test(phone)) errors.push("Valid 10-digit phone number is required");
+                if (!email || !email.trim() || !/^\S+@\S+\.\S+$/.test(email)) errors.push("Valid email is required.");
+                if (!phone || !phone.trim() || !/^\d{10}$/.test(phone)) errors.push("Valid 10-digit phone number is required");
                 break;
 
             case "work-experience":
@@ -235,15 +238,15 @@ const EditResume = () => {
 
             case "education-info":
                 resumeData.education.forEach(({ degree, institution, startDate, endDate }, index) => {
-                    if (!degree.trim()) errors.push(`Degree is required in education ${index + 1}`);
-                    if (!institution.trim()) errors.push(`Institution is required in education ${index + 1}`);
+                    if (!degree || !degree.trim()) errors.push(`Degree is required in education ${index + 1}`);
+                    if (!institution || !institution.trim()) errors.push(`Institution is required in education ${index + 1}`);
                     if (!startDate || !endDate) errors.push(`Start and End dates are required in education ${index + 1}`);
                 });
                 break;
 
             case "skills":
                 resumeData.skills.forEach(({ name, progress }, index) => {
-                    if (!name.trim()) errors.push(`Skill name is required in skill ${index + 1}`);
+                    if (!name || !name.trim()) errors.push(`Skill name is required in skill ${index + 1}`);
                     if (progress < 1 || progress > 100)
                         errors.push(`Skill progress must be between 1 and 100 in skill ${index + 1}`);
                 });
@@ -251,15 +254,15 @@ const EditResume = () => {
 
             case "projects":
                 resumeData.projects.forEach(({ title, description }, index) => {
-                    if (!title.trim()) errors.push(`Project Title is required in project ${index + 1}`);
-                    if (!description.trim()) errors.push(`Project description is required in project ${index + 1}`);
+                    if (!title || !title.trim()) errors.push(`Project Title is required in project ${index + 1}`);
+                    if (!description || !description.trim()) errors.push(`Project description is required in project ${index + 1}`);
                 });
                 break;
 
             case "certifications":
                 resumeData.certifications.forEach(({ title, issuer }, index) => {
-                    if (!title.trim()) errors.push(`Certification Title is required in certification ${index + 1}`);
-                    if (!issuer.trim()) errors.push(`Issuer is required in certification ${index + 1}`);
+                    if (!title || !title.trim()) errors.push(`Certification Title is required in certification ${index + 1}`);
+                    if (!issuer || !issuer.trim()) errors.push(`Issuer is required in certification ${index + 1}`);
                 });
                 break;
 
@@ -604,7 +607,7 @@ const EditResume = () => {
     
         setIsDownloading(true);
         setDownloadSuccess(false);
-        const toastId = toast.loading("Generating PDFâ€¦");
+        const toastId = toast.loading("Generating PDF...");
     
         const override = document.createElement("style");
         override.id = "__pdf_color_override__";
@@ -670,10 +673,11 @@ const EditResume = () => {
     }, [resumeId]);
 
     return (
-        <DashBoardLayout>
+        <div className="bg-[#f0eeeb]">
+            <DashBoardLayout>
             <div className={containerStyles.main}>
                 <div className={containerStyles.header}>
-                    <TitleInput title={resumeData}
+                    <TitleInput title={resumeData?.title}
                         setTitle={(value) => setResumeData(prevData => ({
                             ...prevData,
                             title: value
@@ -700,7 +704,18 @@ const EditResume = () => {
                 <div className={containerStyles.grid}>
                     <div className={containerStyles.formContainer}>
                         <StepProgress progress={progress} />
-                        {renderForm()}
+                        <AnimatePresence initial={false} mode="wait">
+                            <motion.div
+                                key={currentPage} // triggers animation on page change
+                                initial={{ rotateY: -180, opacity: 0 }}
+                                animate={{ rotateY: 0, opacity: 1 }}
+                                exit={{ rotateY: 90, opacity: 0 }}
+                                transition={{ duration: 0.6, ease: "easeInOut" }}
+                                className="w-full"
+                            >
+                                {renderForm()}
+                            </motion.div>
+                        </AnimatePresence>
                         <div className='p-4 sm:p-6'>
                             {errorMsg && (
                                 <div className={statusStyles.error}>
@@ -723,7 +738,7 @@ const EditResume = () => {
                                 <button className={buttonStyles.next} onClick={validateAndNext} disabled={isLoading}>
                                     {currentPage === 'additionalInfo' && <Download size={16} />}
                                     {currentPage === 'additionalInfo' ? "Preview & Download" : "Next"}
-                                    {currentPage === 'additionalInfo' && <ArrowLeft size={16} className="rotate-180" /> }
+                                    {currentPage === 'additionalInfo' && <ArrowRight size={16} /> }
                                 </button>
                             </div>
                         </div>
@@ -802,6 +817,7 @@ const EditResume = () => {
                 </div>
             </div>
         </DashBoardLayout>
+        </div>
     );
 }
 

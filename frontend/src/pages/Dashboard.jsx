@@ -2,7 +2,7 @@ import DashBoardLayout from "../components/DashboardLayout";
 import { dashboardStyles } from "../assets/dummystyle";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { LucideFilePlus, LucideTrash2 } from "lucide-react";
+import { CirclePlus, LucideFilePlus, LucideTrash2 } from "lucide-react";
 import axiosInstance from "../utils/axiosInstance";
 import { API_PATHS } from "../utils/apiPaths";
 import { ResumeSummaryCard } from "../components/Cards";
@@ -10,6 +10,8 @@ import toast from 'react-hot-toast';
 import moment from 'moment';
 import CreateResumeForm from "../components/CreateResumeForm";
 import Modal from "../components/Modal";
+import Lottie from "lottie-react";
+import TemplateAnim from "../assets/TemplateAnim.json";
 
 const Dashboard = () => {
     const navigate = useNavigate();
@@ -140,18 +142,23 @@ const Dashboard = () => {
     }
 
     return (
-        <div>
+        <div className="min-h-screen w-full bg-indigo-1000 text-gray-100 flex flex-col">
             <DashBoardLayout>
                 <div className={dashboardStyles.container}>
                     <div className={dashboardStyles.headerWrapper}>
-                        <div>
-                            <h1 className={dashboardStyles.headerTitle}>My Resumes</h1>
-                            <p className={dashboardStyles.headerSubtitle}>
-                                {allResumes.length > 0
-                                    ? `You have ${allResumes.length} resume${allResumes.length !== 1 ? 's' : '' }`
-                                    : 'Start building your professional resume'
-                                }
-                            </p>
+                        <div className="flex flex-row justify-center items-center">
+                            <div className="w-30 h-30 flex justify-center items-center">
+                                <Lottie animationData={TemplateAnim} loop={true} />
+                            </div>
+                            <div>
+                                <h1 className={dashboardStyles.headerTitle}>My Resumes</h1>
+                                <p className={dashboardStyles.headerSubtitle}>
+                                    {allResumes.length > 0
+                                        ? `You have ${allResumes.length} resume${allResumes.length !== 1 ? 's' : '' }`
+                                        : 'Start building your professional resume'
+                                    }
+                                </p>
+                            </div>
                         </div>
                         <div className="flex gap-4">
                             <button className={dashboardStyles.createButton} onClick={() => setOpenCreateModal(true)}>
@@ -196,7 +203,7 @@ const Dashboard = () => {
                         <div className={dashboardStyles.grid}>
                             <div className={dashboardStyles.newResumeCard} onClick={() => setOpenCreateModal(true)}>
                                 <div className={dashboardStyles.newResumeIcon}>
-                                    <LucideFilePlus size={32} className="text-white"/>
+                                    <CirclePlus size={32} className="text-white"/>
                                 </div>
                                 <h3 className={dashboardStyles.newResumeTitle}>Create New Resume</h3>
                                 <p className={dashboardStyles.newResumeText}>Start building your career</p>

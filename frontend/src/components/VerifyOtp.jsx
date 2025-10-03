@@ -40,9 +40,9 @@ const VerifyOtp = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-indigo-1000 px-4">
       <div className="w-full max-w-md bg-gradient-to-br from-white to-rose-50 rounded-2xl shadow-lg p-8">
-        <h3 className="text-2xl font-semibold text-gray-800 text-center">
+        <h3 className="text-2xl font-semibold bg-gradient-to-r from-violet-500 via-fuchsia-400 to-cyan-400 bg-clip-text text-transparent text-center">
           Verify Your Email
         </h3>
         <p className="mt-2 text-gray-600 text-center">

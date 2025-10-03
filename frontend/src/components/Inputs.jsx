@@ -111,7 +111,7 @@ export const TitleInput = ({ title, setTitle }) => {
                         type="text"
                         placeholder="Resume title"
                         className={styles.inputField(focused)}
-                        value={title.title}
+                        value={title}
                         onChange={({ target }) => setTitle(target.value)}
                         onFocus={() => setFocused(true)}
                         onBlur={() => setFocused(false)}
@@ -123,7 +123,7 @@ export const TitleInput = ({ title, setTitle }) => {
                 </>
             ) : (
                 <>
-                    <h2 className={styles.titleText}>{title.title}</h2>
+                    <h2 className={styles.titleText}>{title}</h2>
                     <button className={styles.editButton} onClick={() => setEditing(true)}>
                         <Edit className={styles.editIcon} />
                     </button>

@@ -7,6 +7,10 @@ import { ProfileInfoCard } from "../components/Cards";
 import Modal from "../components/Modal";
 import Login from "../components/Login";
 import SignUp from "../components/SignUp";
+import TrustedBy from "../components/TrustedBy";
+import resumeSectionImage from "../assets/section_1.webp"
+import Footer from "../components/Footer";
+import FeaturesSection from "../components/FeaturesSection";
 
 export default function LandingPage() {
     const {user} = useContext(UserContext);
@@ -15,6 +19,8 @@ export default function LandingPage() {
     const [openAuthModal, setOpenAuthModal] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [currentPage, setCurrentPage] = useState("login");
+    const [rotation, setRotation] = useState({ x: 0, y: 0 });
+
 
     const handleCTA = () => {
         if(!user) {
@@ -23,6 +29,21 @@ export default function LandingPage() {
             navigate('/dashboard');
         }
     }
+
+    const handleMouseMove = (event) => {
+        const rect = event.currentTarget.getBoundingClientRect();
+        const x = event.clientX - rect.left - rect.width / 2; // distance from center
+        const y = event.clientY - rect.top - rect.height / 2; // distance from center
+        const rotateX = (y / rect.height) * 60;
+        const rotateY = -(x / rect.width) * 60;
+        const rotateZ = (x / rect.width) * 30;
+        setRotation({ x: rotateX, y: rotateY, z: rotateZ });
+    };
+
+    const handleMouseLeave = () => {
+        setRotation({ x: 0, y: 0 }); // reset when cursor leaves
+    };
+
 
     return (
         <div className={landingPageStyles.container}>
@@ -145,7 +166,15 @@ export default function LandingPage() {
                         {/* Right Content */}
                         <div className={landingPageStyles.heroIllustration}>
                             <div className={landingPageStyles.heroIllustrationBg}></div>
-                            <div className={landingPageStyles.heroIllustrationContainer}>
+                            <div className={landingPageStyles.heroIllustrationContainer}
+                                onMouseMove={handleMouseMove}
+                                onMouseLeave={handleMouseLeave}
+                                style={{
+                                    transform: `rotateX(${rotation.x}deg) rotateY(${rotation.y}deg) rotateZ(${rotation.z}deg)`,
+                                    transition: "transform 0.1s ease-out",
+                                    perspective: "1000px",
+                                }}
+                            >
                                 <svg
                                     viewBox="0 0 400 500"
                                     className={landingPageStyles.svgContainer}
@@ -214,7 +243,41 @@ export default function LandingPage() {
                     </div>
                 </section>
 
+                <TrustedBy />
+
+                <section className="w-full py-16 bg-[#f0eeeb]">
+                    <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-12">
+                        
+                        <div className="md:w-1/2 text-center md:text-left">
+                        <h2 className="text-3xl font-bold text-gray-900 mb-4">
+                            Build a Resume That Stands Out
+                        </h2>
+                        <p className="text-gray-600 mb-6">
+                            Showcase your professional experience and skills with a modern, 
+                            clean resume. Our tools and templates help you highlight your 
+                            achievements, making your application more attractive to top companies.
+                        </p><br/>
+                        <ul className="text-gray-700 space-y-2 mb-6">
+                            <li>✔ Professionally designed templates</li>
+                            <li>✔ Easy customization and editing</li>
+                            <li>✔ Optimize your resume for recruiters and ATS systems</li>
+                        </ul>
+                        
+                        </div>
+
+                        <div className="md:w-1/2">
+                        <img
+                            src={resumeSectionImage}
+                            alt="Resume example and personal branding"
+                            className="w-full rounded-xl shadow-lg"
+                        />
+                        </div>
+
+                    </div>
+                </section>
+                
                 {/* Features Section */}
+                <FeaturesSection />
                 <section className={landingPageStyles.featuresSection}>
                     <div className={landingPageStyles.featuresContainer}>
                         <div className={landingPageStyles.featuresHeader}>
@@ -284,7 +347,7 @@ export default function LandingPage() {
                                 <p className={landingPageStyles.ctaDescription}>
                                     Join thousands of professionals who landed their dream jobs with our platform
                                 </p>
-                                <button className={landingPageStyles.ctaButton}>
+                                <button className={landingPageStyles.ctaButton} onClick={handleCTA}>
                                     <div className={landingPageStyles.ctaButtonOverlay}></div>
                                     <span className={landingPageStyles.ctaButtonText}>
                                         Start Building Now
@@ -298,11 +361,7 @@ export default function LandingPage() {
 
             {/* Footer Section */}
             <footer className={landingPageStyles.footer}>
-                <div className={landingPageStyles.footerContainer}>
-                    <p className={landingPageStyles.footerText}>
-                        Crafted with <span className={landingPageStyles.footerHeart}>❤️</span> by ResuMate
-                    </p>
-                </div>
+                <Footer />
             </footer>
 
             {/* Modal For login and Signup */}

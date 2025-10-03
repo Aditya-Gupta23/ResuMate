@@ -2,8 +2,7 @@ import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom"
 import { UserContext } from "../context/UserContext";
 import { cardStyles } from "../assets/dummystyle";
-import { Check, Clock, Edit, Trash2, Zap } from "lucide-react";
-
+import { Check, Clock, Edit, Trash2, Zap, Award, TrendingUp } from "lucide-react";
 
 // Profile Info Cards
 export const ProfileInfoCard = () => {
@@ -63,9 +62,9 @@ export const ResumeSummaryCard = ({title = "Untitled Resume", createdAt = null, 
     };
 
     const getCompletionIcon = () => {
-        if (completion >= 90) return <Award size={12} />;
-        if (completion >= 70) return <TrendingUp size={12} />;
-        return <Zap size={12} />;
+        if (completion >= 90) return <Award size={12} className="text-black" />;
+        if (completion >= 70) return <TrendingUp size={12} className="text-black" />;
+        return <Zap size={12} className="text-black" />;
     };
 
     const handleDeleteClick = (event) => {
@@ -95,11 +94,11 @@ export const ResumeSummaryCard = ({title = "Untitled Resume", createdAt = null, 
         >
             {/* Completion indicator */}
             <div className={cardStyles.completionIndicator}>
-            <div className={`${cardStyles.completionDot} bg-gradient-to-r ${getCompletionColor()}`}>
-                <div className={cardStyles.completionDotInner} />
-            </div>
-            <span className={cardStyles.completionPercentageText}>{completion}%</span>
-            {getCompletionIcon()}
+                <div className={`${cardStyles.completionDot} bg-gradient-to-r ${getCompletionColor()}`}>
+                    <div className={cardStyles.completionDotInner} />
+                </div>
+                <span className={cardStyles.completionPercentageText}>{completion}%</span>
+                {getCompletionIcon()}
             </div>
 
             {/* Preview area */}

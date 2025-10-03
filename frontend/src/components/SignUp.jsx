@@ -4,7 +4,7 @@ import { authStyles } from "../assets/dummystyle";
 import { validateEmail } from "../utils/helper";
 import axiosInstance from "../utils/axiosInstance";
 import { API_PATHS } from "../utils/apiPaths";
-import { Input } from "./inputs";
+import { Input } from "./Inputs";
 
 const SignUp = ({setCurrentPage}) => {
 
