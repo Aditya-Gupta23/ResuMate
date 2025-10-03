@@ -79,6 +79,6 @@ const resumeSchema=new mongoose.Schema({
     ],
     interests:[String],
 
-},{timestamps:{createdAt:"createAt",updatedAt:"updateAt"}})
+},{timestamps:{createdAt:"createdAt",updatedAt:"updatedAt"}})
 
 export default mongoose.model("Resumes",resumeSchema)
