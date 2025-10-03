@@ -23,8 +23,11 @@ const FeaturesSection = () => {
   ];
 
   return (
-    <section className="w-full py-16 bg-[#f0eeeb]">
-      <div className="max-w-6xl mx-auto px-6 lg:px-12">
+    <section className="w-full relative py-16 bg-[#f0eeeb]">
+      {/* Dotted background */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle,_#d1d5db_1px,_transparent_1px)] [background-size:10px_10px]"></div>
+
+      <div className="relative max-w-6xl mx-auto px-6 lg:px-12">
         <h2 className="text-3xl text-gray-900 md:text-4xl font-bold text-center mb-12">
           Everything You Need to Land Your Dream Job
         </h2>

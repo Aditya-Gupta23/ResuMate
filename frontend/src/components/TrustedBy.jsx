@@ -17,7 +17,7 @@ export default function TrustedBy() {
   return (
     <section className="w-full py-16 relative bg-[#f0eeeb] overflow-hidden">
         {/* Dotted background */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle,_#d1d5db_1px,_transparent_1px)] [background-size:40px_40px]"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle,_#d1d5db_1px,_transparent_1px)] [background-size:10px_10px]"></div>
 
         <div className="relative text-center mb-12 z-10">
             <h2 className="text-3xl font-bold text-gray-900">
