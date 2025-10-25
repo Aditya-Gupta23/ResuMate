@@ -142,7 +142,7 @@ const Dashboard = () => {
     }
 
     return (
-        <div className="min-h-screen w-full bg-indigo-1000 text-gray-100 flex flex-col">
+        <div className="min-h-screen w-full bg-gradient-to-br from-slate-900 via-indigo-1000 to-slate-900 text-gray-100 flex flex-col">
             <DashBoardLayout>
                 <div className={dashboardStyles.container}>
                     <div className={dashboardStyles.headerWrapper}>

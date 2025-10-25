@@ -4,6 +4,7 @@ import UserProvider from "./context/UserContext"
 import Dashboard from "./pages/Dashboard"
 import VerifyOtp from "./components/VerifyOtp"
 import EditResume from "./components/EditResume"
+import AtsScoreChecker from "./pages/AtsScoreChecker"
 import { Toaster } from "react-hot-toast"
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
                 <Route path="/verify-otp" element={<VerifyOtp />} />
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/resume/:resumeId" element={<EditResume />} />
+                <Route path="/ats-checker" element={<AtsScoreChecker />} />
             </Routes>
 
             <Toaster toastOption={{

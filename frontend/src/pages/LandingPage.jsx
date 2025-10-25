@@ -123,9 +123,9 @@ export default function LandingPage() {
                             </div>
 
                             <h1 className={landingPageStyles.heading}>
-                                <span className={landingPageStyles.headingText}>Craft</span>
-                                <span className={landingPageStyles.headingGradient}>Professional</span>
-                                <span className={landingPageStyles.headingText}>Resumes</span>
+                                <span className={landingPageStyles.headingText}>Boost</span>
+                                <span className={landingPageStyles.headingGradient}>Employability</span>
+                                <span className={landingPageStyles.headingText}>Today</span>
                             </h1>
 
                             <p className={landingPageStyles.description}>
