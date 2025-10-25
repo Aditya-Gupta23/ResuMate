@@ -9,6 +9,8 @@ const ResumeAnalyzer = () => {
   const inputRef = useRef(null);
   const [isResumeUploaded, setIsResumeUploaded] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
+  const [jobDescription, setJobDescription] = useState("");
+
 
   function handleClick() {
     inputRef.current.click();
@@ -28,7 +30,7 @@ const ResumeAnalyzer = () => {
 
   const formData = new FormData();
   formData.append("resume", selectedFile); // 👈 matches .single("resume")
-  // formData.append("jobDesc", jobDescription || ""); // optional
+  formData.append("jobDesc", jobDescription || ""); // optional
 
   try {
     const response = await axiosInstance.post(
@@ -37,6 +39,7 @@ const ResumeAnalyzer = () => {
       {
         headers: {
           "Content-Type": "multipart/form-data",
+          //Authorization: `Bearer ${token}`,
         },
       }
     );
@@ -97,6 +100,20 @@ const ResumeAnalyzer = () => {
               onChange={handleFileChange}
             />
           </motion.div>
+
+            <div className="mt-4 w-full">
+            <label className="block mb-2 text-gray-700 font-medium">
+                Job Description (optional)
+            </label>
+            <textarea
+                placeholder="Paste job description here..."
+                value={jobDescription}
+                onChange={(e) => setJobDescription(e.target.value)}
+                className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-400"
+                rows={4}
+            />
+            </div>
+
 
           {/* BUTTONS */}
           <div className="flex flex-wrap gap-4 mt-4">
