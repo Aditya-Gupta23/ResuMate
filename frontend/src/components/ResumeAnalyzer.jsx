@@ -2,6 +2,8 @@ import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Upload, FileCheck, Sparkles } from "lucide-react";
 import atsImage from "../assets/ResumeCheckerHeader.svg";
+import { API_PATHS } from "../utils/apiPaths";
+import axiosInstance from "../utils/axiosInstance";
 
 const ResumeAnalyzer = () => {
   const inputRef = useRef(null);
@@ -20,10 +22,31 @@ const ResumeAnalyzer = () => {
     }
   }
 
-  function analyzeResume() {
-    if (!selectedFile) return alert("Please upload a resume first!");
-    console.log("Analyzing:", selectedFile.name);
+  async function analyzeResume() {
+  if (!selectedFile) return alert("Please upload a resume first!");
+  console.log("Analyzing:", selectedFile.name);
+
+  const formData = new FormData();
+  formData.append("resume", selectedFile); // 👈 matches .single("resume")
+  // formData.append("jobDesc", jobDescription || ""); // optional
+
+  try {
+    const response = await axiosInstance.post(
+      API_PATHS.analyzer.ANALYZE_RESUME,
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+    console.log("Response:", response.data);
+  } catch (error) {
+    console.error("Error analyzing resume:", error);
+    alert(error.response?.data?.message || "Failed to analyze resume.");
   }
+}
+
 
   return (
       <motion.div

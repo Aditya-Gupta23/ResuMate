@@ -23,5 +23,8 @@ export const API_PATHS = {
     },
     image: {
         UPLOAD_IMAGE: '/api/auth/upload-image'
+    },
+    analyzer: {
+        ANALYZE_RESUME: '/api/ats/analyze'
     }
 }
