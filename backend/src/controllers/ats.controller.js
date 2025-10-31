@@ -5,6 +5,7 @@ import fs from "fs";
 
 
 export const analyseResume=async (req,res)=>{
+    setTimeout(15000);
     console.log('HI')
     try{
         const {jobDesc}=req.body;
