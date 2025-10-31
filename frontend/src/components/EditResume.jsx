@@ -3,7 +3,7 @@ import { buttonStyles, containerStyles, iconStyles, statusStyles } from "../asse
 import DashBoardLayout from "./DashboardLayout";
 import { TitleInput } from "./Inputs";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { AlertCircle, ArrowLeft, ArrowRight, Check, Download, Loader2, Palette, Save, Trash2 } from "lucide-react";
+import { AlertCircle, ArrowLeft, ArrowRight, Check, Download, Eye, Loader2, Palette, Save, Trash2 } from "lucide-react";
 import axiosInstance from "../utils/axiosInstance";
 import { API_PATHS } from "../utils/apiPaths";
 import toast from "react-hot-toast";
@@ -534,7 +534,7 @@ const EditResume = () => {
 
             document.body.removeChild(fixedThumbnail);
 
-            // Stor the image as resume
+            // Store the image as resume
             const thumbnailDataUrl = thumbnailCanvas.toDataURL("image/png");
             const thumbnailFile = dataURLtoFile(
                 thumbnailDataUrl,
@@ -694,7 +694,7 @@ const EditResume = () => {
                             <span className="text-sm">Delete</span>
                         </button>
                         <button onClick={() => setOpenPreviewModal(true)} className={buttonStyles.download} disabled={isLoading}>
-                            <Download size={16} />
+                            <Eye size={16} />
                             <span className="text-sm">Preview</span>
                         </button>
                     </div>

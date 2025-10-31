@@ -7,6 +7,7 @@ import EditResume from "./components/EditResume"
 import AtsScoreChecker from "./pages/AtsScoreChecker"
 import { Toaster } from "react-hot-toast"
 import PrivateRoute from "./components/PrivateRoute"
+import ProfilePage from "./pages/ProfilePage"
 
 function App() {
     return (
@@ -35,6 +36,14 @@ function App() {
                     element = {
                         <PrivateRoute>
                             <AtsScoreChecker />
+                        </PrivateRoute>
+                    }
+                />
+                <Route 
+                    path="/profile-page" 
+                    element = {
+                        <PrivateRoute>
+                            <ProfilePage />
                         </PrivateRoute>
                     }
                 />

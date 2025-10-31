@@ -4,15 +4,15 @@ export const landingPageStyles = {
 
   // Header
   header: "fixed top-0 w-full z-50 bg-white/5 backdrop-blur-xl border-b border-violet-500/30 shadow-sm transition-colors duration-300",
-  headerContainer: "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center",
-  logoContainer: "flex items-center gap-3 hover:opacity-90 transition-opacity",
-  logoIcon: "w-11 h-11 bg-gradient-to-br from-violet-600 via-fuchsia-600 to-cyan-500 rounded-2xl flex items-center justify-center shadow-lg shadow-violet-500/40",
-  logoIconInner: "w-6 h-6 text-white drop-shadow",
-  logoText: "text-2xl sm:text-3xl font-extrabold bg-gradient-to-r from-violet-400 via-fuchsia-400 to-cyan-400 bg-clip-text text-transparent tracking-tight",
+  headerContainer: "max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center",
+  logoContainer: "flex items-center gap-3 hover:opacity-90 transition-opacity cursor-pointer",
+  logoIcon: "w-11 h-11 bg-gradient-to-br from-violet-600 via-fuchsia-600 to-cyan-500 rounded-2xl flex items-center justify-center shadow-lg shadow-violet-500/40 cursor-pointer",
+  logoIconInner: "w-6 h-6 text-white drop-shadow cursor-pointer",
+  logoText: "text-2xl sm:text-3xl font-extrabold font-sans bg-gradient-to-r from-violet-400 via-fuchsia-400 to-cyan-400 bg-clip-text text-transparent tracking-tight cursor-pointer",
 
   // Mobile menu button
-  mobileMenuButton: "md:hidden p-2 rounded-xl hover:bg-violet-500/20 active:scale-95 transition-all",
-  mobileMenuIcon: "text-violet-400",
+  menuButton: "p-2 rounded-xl hover:bg-violet-500/20 active:scale-95 transition-all cursor-pointer",
+  menuIcon: "text-violet-400",
 
   // Auth buttons
   desktopAuthButton: "relative group px-7 py-3 bg-gradient-to-r from-violet-600 via-fuchsia-600 to-cyan-500 text-white font-semibold rounded-2xl overflow-hidden shadow-md hover:scale-105 hover:shadow-xl transition-all",
@@ -21,14 +21,15 @@ export const landingPageStyles = {
   mobileAuthButton: "w-full px-6 py-3 bg-gradient-to-r from-violet-600 via-fuchsia-600 to-cyan-500 text-white font-semibold rounded-xl shadow-md hover:shadow-lg transition-all",
 
   // Mobile menu
-  mobileMenu: "md:hidden bg-slate-900/95 backdrop-blur-lg w-full fixed top-16 left-0 right-0 z-40 shadow-lg border-b border-violet-500/30 animate-slide-down",
-  mobileMenuContainer: "max-w-6xl mx-auto px-4 sm:px-6 py-6 flex flex-col gap-4",
-  mobileUserInfo: "flex flex-col gap-3 text-center",
-  mobileUserWelcome: "text-violet-300 font-semibold text-lg tracking-tight mb-2",
-  mobileDashboardButton: "w-full px-6 py-3 bg-gradient-to-r from-violet-600 to-cyan-500 text-white font-semibold rounded-xl shadow hover:shadow-lg transition-all",
+  menu: "bg-white/95 backdrop-blur-xl border border-gray-200 rounded-2xl shadow-xl fixed top-16 right-4 w-[260px] z-50 animate-fade-in md:absolute md:right-0 md:top-14",
+  menuUserInfo: "flex flex-col items-center gap-2",
+  menuUserWelcome: "text-gray-700 font-semibold text-base",
+  menuField: "w-full py-2.5 bg-gradient-to-r from-violet-600 to-cyan-500 text-white font-semibold rounded-xl hover:shadow-md transition-all active:scale-[0.98]",
+  menuAuthButton: "w-full py-2.5 bg-violet-600 text-white font-semibold rounded-2xl hover:bg-violet-700 transition-all active:scale-[0.98]",
+  menuContainer: "flex flex-col gap-3 p-5",
 
   // Main content
-  main: "pt-28",
+  main: "pt-12",
 
   // Hero section
   heroSection: "relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24",
@@ -165,8 +166,8 @@ export const dashboardStyles = {
 
 export const cardStyles = {
   // ProfileInfoCard styles
-  profileCard: "flex items-center gap-3 p-2 sm:p-3 bg-white backdrop-blur-xl border border-gray-200 rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 hover:scale-[1.03]",
-  profileInitialsContainer: "w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-violet-500 to-fuchsia-500 rounded-2xl flex items-center justify-center shadow-md",
+  profileCard: "flex items-center gap-3 p-2 sm:p-3 bg-white backdrop-blur-xl border border-gray-200 rounded-4xl shadow-md hover:shadow-lg transition-all duration-300 hover:scale-[1.03]",
+  profileInitialsContainer: "w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-violet-500 to-fuchsia-500 rounded-3xl flex items-center justify-center shadow-md",
   profileInitialsText: "text-base sm:text-lg font-black text-white",
   profileName: "text-xs sm:text-sm font-bold text-gray-800",
   logoutButton: "text-violet-600 text-[10px] sm:text-xs font-bold cursor-pointer hover:text-fuchsia-600 transition-colors",
@@ -412,7 +413,7 @@ export const photoSelectorStyles = {
 };
 
 export const titleInputStyles = {
-  container: "flex items-center gap-3",
+  container: "flex font-sans items-center gap-3",
   titleText: "text-lg sm:text-xl font-bold text-gray-800",
   editButton: "p-2 rounded-xl bg-gray-100 hover:bg-gray-200 transition-all group",
   editIcon: "w-5 h-5 text-gray-600 group-hover:text-violet-600 transition-colors",

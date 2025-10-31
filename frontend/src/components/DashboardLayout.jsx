@@ -7,17 +7,33 @@ const DashBoardLayout = ({activeMenu, children}) => {
 
     if (loading) {
         return (
-            <div>
+            <div className="flex items-center justify-center mx-auto mt-25">
                 <Navbar activeMenu={activeMenu} />
-                <div className="flex justify-center items-center h-40">Loading...</div>
+                <div
+                    className="
+                        w-16 h-16
+                        rounded-full
+                        border-5 
+                        border-t-4
+                        border-t-indigo-500
+                        border-gray-200
+                        animate-spin
+                        shadow-xl
+                    "
+                    role="status"
+                    aria-label="loading"
+                >
+                    {/* Screen reader text for accessibility */}
+                    <span className="sr-only">Loading...</span>
+                </div>
             </div>
         );
     }
 
     return (
         <div>
-            <Navbar activeMenu={activeMenu} />
-            {user && <div className="container mx-auto pt-4 pb-4">{children}</div>}
+            <Navbar user={user} activeMenu={activeMenu} />
+            {user && <div className="container mx-auto pt-4 pb-4 mt-16">{children}</div>}
         </div>
     );
 }

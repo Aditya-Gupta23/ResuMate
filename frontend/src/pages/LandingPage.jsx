@@ -3,7 +3,6 @@ import { landingPageStyles } from "../assets/dummystyle";
 import { LayoutTemplate, X, Menu, ArrowRight, Zap, Download, LogIn } from 'lucide-react';
 import { UserContext } from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
-import { ProfileInfoCard } from "../components/Cards";
 import Modal from "../components/Modal";
 import Login from "../components/Login";
 import SignUp from "../components/SignUp";
@@ -11,16 +10,15 @@ import TrustedBy from "../components/TrustedBy";
 import resumeSectionImage from "../assets/section_1.webp"
 import Footer from "../components/Footer";
 import FeaturesSection from "../components/FeaturesSection";
+import Navbar from "../components/Navbar";
 
 export default function LandingPage() {
     const {user} = useContext(UserContext);
     const navigate = useNavigate();
 
     const [openAuthModal, setOpenAuthModal] = useState(false);
-    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [currentPage, setCurrentPage] = useState("login");
     const [rotation, setRotation] = useState({ x: 0, y: 0 });
-
 
     const handleCTA = (whichButton) => {
         if(!user) {
@@ -49,69 +47,7 @@ export default function LandingPage() {
     return (
         <div className={landingPageStyles.container}>
             {/* Header */}
-            <header className={landingPageStyles.header}>
-                <div className={landingPageStyles.headerContainer}>
-                    <div className={landingPageStyles.logoContainer}>
-                        <div className={landingPageStyles.logoIcon}>
-                            <LayoutTemplate className={landingPageStyles.logoIconInner} />
-                        </div>
-                        <span className={landingPageStyles.logoText}>
-                            ResuMate
-                        </span>
-                    </div>
-
-                    {/* Mobile Menu Btn */}
-                    <button className={landingPageStyles.mobileMenuButton} onClick={() => {setMobileMenuOpen(!mobileMenuOpen)}}>
-                        {mobileMenuOpen
-                            ? <X size={24} className={landingPageStyles.mobileMenuIcon} />
-                            : <Menu size={24} className={landingPageStyles.mobileMenuIcon} />
-                        }
-                    </button>
-
-                    {/* Desktop Navigation */}
-                    <div className="hidden md:flex items-center">
-                        {user ? (
-                            <ProfileInfoCard />
-                        ) : (
-                            <button className={landingPageStyles.desktopAuthButton} onClick={() => setOpenAuthModal(true)}>
-                                <div className={landingPageStyles.desktopAuthButtonOverlay}></div>
-                                <span className={landingPageStyles.desktopAuthButtonText}>Get Started</span>
-                            </button>
-                        )}
-                    </div>
-                </div>
-
-                {/* Mobile Menu */}
-                {mobileMenuOpen && (
-                    <div className={landingPageStyles.mobileMenu}>
-                        <div className={landingPageStyles.mobileMenuContainer}>
-                            {user ? (
-                                <div className={landingPageStyles.mobileUserInfo}>
-                                    <div className={landingPageStyles.mobileUserWelcome}>
-                                        Welcome Back
-                                    </div>
-                                    <button className={landingPageStyles.mobileDashboardButton}
-                                        onClick={() => {
-                                            navigate('/dashboard');
-                                            setMobileMenuOpen(false);
-                                        }}>
-                                        Go to Dashboard
-                                    </button>
-                                </div>
-                            ) : (
-                                <button className={landingPageStyles.mobileAuthButton}
-                                    onClick={() => {
-                                        setOpenAuthModal(true);
-                                        setMobileMenuOpen(false);
-                                    }}
-                                >
-                                    Get Started
-                                </button>
-                            )}
-                        </div>
-                    </div>
-                )}
-            </header>
+            <Navbar user={user} setOpenAuthModal={setOpenAuthModal} />
 
             {/* Main Content */}
             <main className={landingPageStyles.main}>
