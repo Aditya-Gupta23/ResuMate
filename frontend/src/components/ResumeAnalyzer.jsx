@@ -5,6 +5,7 @@ import atsImage from "../assets/ResumeCheckerHeader.svg";
 import { API_PATHS } from "../utils/apiPaths";
 import axiosInstance from "../utils/axiosInstance";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 const ResumeAnalyzer = () => {
   const inputRef = useRef(null);
@@ -12,6 +13,7 @@ const ResumeAnalyzer = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [jobDescription, setJobDescription] = useState("");
   const [atsResult, setAtsResult] = useState("");
+  const [showLoader,setShowLoader]=useState(false)
 
 
   function handleClick() {
@@ -29,10 +31,11 @@ const ResumeAnalyzer = () => {
   async function analyzeResume() {
   if (!selectedFile) return alert("Please upload a resume first!");
   console.log("Analyzing:", selectedFile.name);
+  setShowLoader(true);
 
   const formData = new FormData();
   formData.append("resume", selectedFile); // 👈 matches .single("resume")
-  formData.append("jobDesc", jobDescription || ""); // optional
+  formData.append("jobDesc", jobDescription || "Software Engineer"); // optional
 
   try {
     const response = await axiosInstance.post(
@@ -48,16 +51,19 @@ const ResumeAnalyzer = () => {
     const atsResult = response.data.atsResult;
     console.log("Ats Result:", response.data);
     setAtsResult(atsResult || "");
+    setShowLoader(false)
   } catch (error) {
     console.error("Error analyzing resume:", error);
     alert(error.response?.data?.message || "Failed to analyze resume.");
+    setShowLoader(false)
+
   }
 }
 
 
   return (
     <motion.div
-        className="flex flex-col md:flex-row items-center justify-between gap-14 bg-white backdrop-blur-2xl rounded-3xl shadow-2xl p-10 border border-gray-200 max-w-6xl w-full"
+        className="bg-white backdrop-blur-2xl rounded-3xl shadow-2xl p-10 border border-gray-200 max-w-6xl w-full"
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
@@ -161,20 +167,61 @@ const ResumeAnalyzer = () => {
                 />
             </motion.div>
         </div>
-        
+        {showLoader && 
+            <div className="flex items-center justify-center p-5">
+                <div
+                    className="
+                        w-32 h-32              /* Big size */
+                        rounded-full           /* Perfect circle */
+                        border-8               /* Thick border */
+                        border-t-4             /* Thinner colored top border for visual contrast */
+                        border-t-indigo-500    /* Distinct color for the spinning part */
+                        border-gray-200        /* Background border color */
+                        animate-spin           /* The spinning animation */
+                        shadow-xl              /* Add some depth */
+                    "
+                    role="status"
+                    aria-label="loading"
+                >
+                    {/* Screen reader text for accessibility */}
+                    <span className="sr-only">Loading...</span>
+                </div>
+            </div>
+        }
         {atsResult && (
             <motion.div
-                className="mt-6 w-full p-5 border border-violet-300 rounded-xl bg-white shadow-lg"
+                className="mt-8 w-full p-8 border border-violet-300 rounded-2xl bg-white shadow-lg"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4 }}
             >
-                <h2 className="text-2xl font-bold text-violet-600 mb-3">ATS Analysis Result</h2>
-                <div className="prose max-w-none text-gray-700">
-                <ReactMarkdown>{atsResult}</ReactMarkdown>
-                </div>
+                <h2 className="text-3xl font-extrabold text-violet-700 mb-6">
+                ATS Analysis Result
+                </h2>
+                <div className="prose prose-violet prose-headings:font-semibold prose-h1:text-3xl prose-h2:text-2xl prose-h3:text-xl prose-p:text-gray-800 prose-li:marker:text-violet-600 prose-a:text-violet-600 prose-a:underline leading-relaxed space-y-6 max-w-none">
+                        <ReactMarkdown
+                            remarkPlugins={[remarkGfm]}
+                            components={{
+                            strong: (props) => (
+                                <strong className="text-violet-700 font-semibold" {...props} />
+                            ),
+                            h2: (props) => (
+                                <h2 className="mt-8 mb-3 border-b border-violet-200 pb-1" {...props} />
+                            ),
+                            ul: (props) => (
+                                <ul className="list-disc ml-6 space-y-2" {...props} />
+                            ),
+                            ol: (props) => (
+                                <ol className="list-decimal ml-6 space-y-2" {...props} />
+                            )
+                            }}
+                        >
+                            {atsResult}
+                        </ReactMarkdown>
+                    </div>
             </motion.div>
         )}
+
     </motion.div>    
   );
 };
