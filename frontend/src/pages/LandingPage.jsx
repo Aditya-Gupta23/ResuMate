@@ -22,11 +22,12 @@ export default function LandingPage() {
     const [rotation, setRotation] = useState({ x: 0, y: 0 });
 
 
-    const handleCTA = () => {
+    const handleCTA = (whichButton) => {
         if(!user) {
             setOpenAuthModal(true);
         } else {
-            navigate('/dashboard');
+            whichButton == "buildResumeButton" && navigate('/dashboard');
+            whichButton == "atsScoreButton" && navigate('/ats-checker');
         }
     }
 
@@ -134,15 +135,15 @@ export default function LandingPage() {
                             </p>
 
                             <div className={landingPageStyles.ctaButtons}>
-                                <button className={landingPageStyles.primaryButton} onClick={handleCTA}>
+                                <button className={landingPageStyles.primaryButton} onClick={() => handleCTA("buildResumeButton")}>
                                     <div className={landingPageStyles.primaryButtonOverlay}></div>
                                     <span className={landingPageStyles.primaryButtonContent}>
                                         Start Building
                                         <ArrowRight className={landingPageStyles.primaryButtonIcon} size={18} />
                                     </span>
                                 </button>
-                                <button className={landingPageStyles.secondaryButton} onClick={handleCTA}>
-                                    View Templates
+                                <button className={landingPageStyles.secondaryButton} onClick={() => handleCTA("atsScoreButton")}>
+                                    Get Your Ats Score
                                 </button>
                             </div>
 
@@ -347,7 +348,7 @@ export default function LandingPage() {
                                 <p className={landingPageStyles.ctaDescription}>
                                     Join thousands of professionals who landed their dream jobs with our platform
                                 </p>
-                                <button className={landingPageStyles.ctaButton} onClick={handleCTA}>
+                                <button className={landingPageStyles.ctaButton} onClick={() => handleCTA("buildResumeButton")}>
                                     <div className={landingPageStyles.ctaButtonOverlay}></div>
                                     <span className={landingPageStyles.ctaButtonText}>
                                         Start Building Now
