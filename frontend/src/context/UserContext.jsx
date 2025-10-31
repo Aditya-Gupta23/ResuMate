@@ -28,6 +28,7 @@ const UserProvider = ({children}) => {
             }
         };
         fetchUser();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const updateUser = ({ user, accessToken }) => {
@@ -47,9 +48,9 @@ const UserProvider = ({children}) => {
         } catch (error) {
             console.error("Logout failed:", error);
         } finally {
-            localStorage.removeItem("accessToken"); // clear client token
-            setUser(null);                          // reset React state
-            window.location.href = "/login";        // redirect
+            localStorage.removeItem("accessToken");
+            setUser(null);
+            window.location.href = "/";
         }
     };
 

@@ -6,6 +6,7 @@ import VerifyOtp from "./components/VerifyOtp"
 import EditResume from "./components/EditResume"
 import AtsScoreChecker from "./pages/AtsScoreChecker"
 import { Toaster } from "react-hot-toast"
+import PrivateRoute from "./components/PrivateRoute"
 
 function App() {
     return (
@@ -13,18 +14,38 @@ function App() {
             <Routes>
                 <Route path="/" element={<LandingPage />} />
                 <Route path="/verify-otp" element={<VerifyOtp />} />
-                <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/resume/:resumeId" element={<EditResume />} />
-                <Route path="/ats-checker" element={<AtsScoreChecker />} />
+                <Route 
+                    path="/dashboard" 
+                    element = {
+                        <PrivateRoute>
+                            <Dashboard />
+                        </PrivateRoute>
+                    }
+                />
+                <Route 
+                    path="/resume/:resumeId" 
+                    element = {
+                        <PrivateRoute>
+                            <EditResume />
+                        </PrivateRoute>
+                    }
+                />
+                <Route 
+                    path="/ats-checker" 
+                    element = {
+                        <PrivateRoute>
+                            <AtsScoreChecker />
+                        </PrivateRoute>
+                    }
+                />
             </Routes>
 
-            <Toaster toastOption={{
+            <Toaster toastOptions={{
                 className: "",
                 style: {
                     fontSize: "13px"
                 }
             }}>
-
             </Toaster>
         </UserProvider>
     )
