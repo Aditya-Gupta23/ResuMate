@@ -1,10 +1,23 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
 
 export default function ProfilePage() {
   const { user } = useContext(UserContext);
+  const [profilePic, setProfilePic] = useState(user?.profilePic || "");
   const navigate = useNavigate();
+
+  const handleProfileUpload = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      setProfilePic(reader.result); // Update the UI immediately
+      user.profilePic = reader.result; // Optionally update context user object
+    };
+    reader.readAsDataURL(file);
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white px-6 py-16">
@@ -25,12 +38,25 @@ export default function ProfilePage() {
         {/* Profile Card */}
         <div className="mt-10 bg-slate-900/60 border border-slate-800 rounded-2xl shadow-xl backdrop-blur-xl p-8 flex flex-col items-center gap-4">
           {/* Avatar */}
-          <div className="w-24 h-24 rounded-full overflow-hidden border border-violet-500 shadow-lg">
-            <img
-              src={user?.profilePic || "https://api.dicebear.com/7.x/thumbs/svg?seed=User"}
-              alt="profile"
-              className="w-full h-full object-cover"
-            />
+          <div className="relative group">
+            <div className="w-24 h-24 rounded-full overflow-hidden border border-violet-500 shadow-lg">
+              <img
+                src={profilePic || "https://api.dicebear.com/7.x/thumbs/svg?seed=User"}
+                alt="profile"
+                className="w-full h-full object-cover"
+              />
+            </div>
+
+            {/* Upload Button */}
+            <label className="absolute bottom-0 right-0 cursor-pointer bg-violet-600 hover:bg-violet-500 rounded-full px-2 py-1 text-xs shadow-md transition opacity-90 group-hover:opacity-100">
+              Upload
+              <input
+                type="file"
+                accept="image/*"
+                className="hidden"
+                onChange={handleProfileUpload}
+              />
+            </label>
           </div>
 
           {/* User Info */}
@@ -57,7 +83,7 @@ export default function ProfilePage() {
         <div className="mt-14">
           <h3 className="text-xl font-semibold mb-4">Your Resumes</h3>
 
-          <div className=" border border-slate-800 rounded-2xl shadow-lg p-6 bg-slate-900/40 backdrop-blur-xl text-center text-slate-400">
+          <div className="border border-slate-800 rounded-2xl shadow-lg p-6 bg-slate-900/40 backdrop-blur-xl text-center text-slate-400">
             <p>No resumes yet. Start building one!</p>
             <button
               onClick={() => navigate("/dashboard")}

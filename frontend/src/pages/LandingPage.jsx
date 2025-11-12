@@ -82,22 +82,6 @@ export default function LandingPage() {
                                     Get Your Ats Score
                                 </button>
                             </div>
-
-                            {/* Stats Grid */}
-                            <div className={landingPageStyles.statsContainer}>
-                                {[
-                                    { value: '50K+', label: 'Resumes Created', gradient: 'from-violet-600 to-fuchsia-600' },
-                                    { value: '4.9★', label: 'User Rating', gradient: 'from-orange-500 to-red-500' },
-                                    { value: '5 Min', label: 'Build Time', gradient: 'from-emerald-500 to-teal-500' }
-                                ].map((stat, idx) => (
-                                    <div className={landingPageStyles.statItem} key={idx}>
-                                        <div className={`${landingPageStyles.statNumber} ${stat.gradient}`}>
-                                            {stat.value}
-                                        </div>
-                                        <div className={landingPageStyles.statLabel}>{stat.label}</div>
-                                    </div>
-                                ))}
-                            </div>    
                         </div>
 
                         {/* Right Content */}
@@ -297,7 +281,7 @@ export default function LandingPage() {
             </main>
 
             {/* Footer Section */}
-            <footer className={landingPageStyles.footer}>
+            <footer id="contact" className={landingPageStyles.footer}>
                 <Footer />
             </footer>
 

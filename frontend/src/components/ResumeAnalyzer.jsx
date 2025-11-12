@@ -199,26 +199,26 @@ const ResumeAnalyzer = () => {
                 ATS Analysis Result
                 </h2>
                 <div className="prose prose-violet prose-headings:font-semibold prose-h1:text-3xl prose-h2:text-2xl prose-h3:text-xl prose-p:text-gray-800 prose-li:marker:text-violet-600 prose-a:text-violet-600 prose-a:underline leading-relaxed space-y-6 max-w-none">
-                        <ReactMarkdown
-                            remarkPlugins={[remarkGfm]}
-                            components={{
-                            strong: (props) => (
-                                <strong className="text-violet-700 font-semibold" {...props} />
-                            ),
-                            h2: (props) => (
-                                <h2 className="mt-8 mb-3 border-b border-violet-200 pb-1" {...props} />
-                            ),
-                            ul: (props) => (
-                                <ul className="list-disc ml-6 space-y-2" {...props} />
-                            ),
-                            ol: (props) => (
-                                <ol className="list-decimal ml-6 space-y-2" {...props} />
-                            )
-                            }}
-                        >
-                            {atsResult}
-                        </ReactMarkdown>
-                    </div>
+                    <ReactMarkdown
+                        remarkPlugins={[remarkGfm]}
+                        components={{
+                        strong: (props) => (
+                            <strong className="text-violet-700 font-semibold" {...props} />
+                        ),
+                        h2: (props) => (
+                            <h2 className="mt-8 mb-3 border-b border-violet-200 pb-1" {...props} />
+                        ),
+                        ul: (props) => (
+                            <ul className="list-disc ml-6 space-y-2" {...props} />
+                        ),
+                        ol: (props) => (
+                            <ol className="list-decimal ml-6 space-y-2" {...props} />
+                        )
+                        }}
+                    >
+                        {atsResult}
+                    </ReactMarkdown>
+                </div>
             </motion.div>
         )}
 

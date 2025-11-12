@@ -56,6 +56,13 @@ const Navbar = ({user, setOpenAuthModal}) => {
                                 </button>
 
                                 <button
+                                    onClick={() => navigate('/mock-interview')}
+                                    className={landingPageStyles.menuField}
+                                >
+                                    Mock Interview
+                                </button>
+
+                                <button
                                     onClick={() => navigate('/profile-page')}
                                     className={landingPageStyles.menuField}
                                 >

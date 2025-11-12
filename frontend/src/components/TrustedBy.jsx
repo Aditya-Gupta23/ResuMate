@@ -24,7 +24,7 @@ export default function TrustedBy() {
             Trusted by job seekers who've landed at top companies
             </h2>
             <p className="text-gray-600 mt-3">
-            Our users have secured positions at industry-leading companies such as
+                secure positions at industry-leading companies
             </p>
         </div>
 

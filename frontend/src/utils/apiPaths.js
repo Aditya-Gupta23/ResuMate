@@ -26,5 +26,9 @@ export const API_PATHS = {
     },
     analyzer: {
         ANALYZE_RESUME: '/api/ats/analyze'
+    },
+    interview: {
+        GENERATE: '/api/interview/generate',
+        EVALUATE: '/api/interview/evaluate'
     }
 }
