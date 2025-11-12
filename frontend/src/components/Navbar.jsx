@@ -20,6 +20,25 @@ const Navbar = ({user, setOpenAuthModal}) => {
                     </span>
                 </div>
 
+                {/* Middle Links */}
+                <nav className="hidden md:flex space-x-24">
+                    <Link to="/dashboard" className="text-white-700 hover:text-violet-600 font-medium transition-colors">Dashboard</Link>
+                    <Link to="/ats-checker" className="text-white-700 hover:text-violet-600 font-medium transition-colors">Check Ats Score</Link>
+                    <Link to="/mock-interview" className="text-white-700 hover:text-violet-600 font-medium transition-colors">Mock Interview</Link>
+                    <Link
+                        to="#contact"
+                        onClick={(e) => {
+                            e.preventDefault();
+                            document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+                        }}
+                        className="relative text-white-700 font-medium hover:text-violet-600 transition-colors"
+                        >
+                        Contact
+                        <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-violet-600 transition-all group-hover:w-full"></span>
+                    </Link>
+
+                </nav>
+
                 {/* Menu Btn */}
                 <button className={landingPageStyles.menuButton} onClick={() => {setMenuOpen(!menuOpen)}}>
                     {menuOpen
