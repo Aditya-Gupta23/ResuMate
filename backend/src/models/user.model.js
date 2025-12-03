@@ -35,6 +35,12 @@ const userSchema=new mongoose.Schema({
         type: Boolean,
         default: false,
     },
+    jobAlert:{
+        enabled: { type: Boolean, default: false },
+        keywords: { type: String, default: "" },     
+        location: { type: String, default: "" },     
+        lastAlert: { type: Date }
+    }
 },{timestamps:true});
 
 export const User=mongoose.model("User",userSchema)
