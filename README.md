@@ -23,9 +23,9 @@ It combines **resume building**, **AI-based job matching**, **interview preparat
   - AI-generated **role-specific interview questions**
   - Practice using realistic sample questions
 
-- **Job Portal (Sample)**
+- **Job Portal **
   - Browse sample job listings
-  - Apply using created resumes
+  - Apply for them 
 
 - **Daily Job Alerts**
   - Automated job alerts based on user preferences
