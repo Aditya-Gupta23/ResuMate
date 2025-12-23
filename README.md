@@ -23,7 +23,7 @@ It combines **resume building**, **AI-based job matching**, **interview preparat
   - AI-generated **role-specific interview questions**
   - Practice using realistic sample questions
 
-- **Job Portal **
+- **Job Portal**
   - Browse sample job listings
   - Apply for them 
 
@@ -39,7 +39,7 @@ It combines **resume building**, **AI-based job matching**, **interview preparat
 - **Backend:** Node.js, Express
 - **Database:** MongoDB
 - **Authentication:** JWT
-- **AI Services:** OpenAI API
+- **AI Services:** Google Gemini API
 - **Email Services:** Nodemailer
 - **Cron Jobs:** Daily alerts & background tasks
 
@@ -54,12 +54,12 @@ cd ResuMate
 
 Install Dependencies
 Backend
-**cd backend
-**npm install
+- **cd backend**
+- **npm install**
 
 Frontend
-**cd frontend
-**npm install
+- **cd frontend**
+- **npm install**
 
 Create a .env file inside the backend folder.
 
