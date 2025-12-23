@@ -1,6 +1,7 @@
 import {geminiModel} from "../utils/geminiClient.js"
 
 export const generateInterviewQuestions= async(req,res)=>{
+    req.setTimeout(15000);
     try{
         const {profile,subjects}=req.body;
         if (!profile || !subjects || subjects.length === 0) {
