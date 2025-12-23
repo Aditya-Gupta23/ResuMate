@@ -64,13 +64,25 @@ npm install
 Create a .env file inside the backend folder.
 
 backend/.env
-PORT=5000
-MONGO_URI=your_mongodb_connection_string
-JWT_SECRET=your_jwt_secret
+PORT=5050
+MONGO_URI=
+MONGO_DB_NAME=
+JWT_SECRET=write_a_secret_key_of_your_own_or_leave_it_like_this
+JWT_REFRESH_SECRET=write_a_secret_key_of_your_own_or_leave_it_like_this
+ACCESS_TOKEN_TTL=15m
+REFRESH_TOKEN_TTL=7d
+CLIENT_URL=http://localhost:5173
 
-OPENAI_API_KEY=your_openai_api_key
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
+SMTP_USER=youremail@gmail.com
+SMTP_PASS=your_app_password
+SMTP_FROM="ResuMate <no-reply@resumate.app>"
 
-NODEMAILER_USER=your_mailtrap_username
-NODEMAILER_PASSWORD=your_mailtrap_password
+VITE_GOOGLE_CLIENT_ID=Your_client_id
+GOOGLE_CALLBACK_URL=
+GOOGLE_CLIENT_SECRET=Your_client_secret
+GEMINI_API_KEY=Your_Key
 
-  
+JSEARCH_API_KEY= Your_api_key
+JSEARCH_API_HOST=jsearch.p.rapidapi.com
