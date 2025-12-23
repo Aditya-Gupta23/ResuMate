@@ -9,6 +9,7 @@ import { Toaster } from "react-hot-toast"
 import PrivateRoute from "./components/PrivateRoute"
 import ProfilePage from "./pages/ProfilePage"
 import MockInterview from "./pages/mockInterview"
+import JobAlerts from "./pages/jobAlerts"
 
 function App() {
     return (
@@ -53,6 +54,14 @@ function App() {
                     element = {
                         <PrivateRoute>
                             <ProfilePage />
+                        </PrivateRoute>
+                    }
+                />
+                <Route 
+                    path="/job-alerts" 
+                    element = {
+                        <PrivateRoute>
+                            <JobAlerts />
                         </PrivateRoute>
                     }
                 />

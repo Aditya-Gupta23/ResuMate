@@ -24,7 +24,7 @@ export default function Footer() {
                 Craft resumes that impress employers and help you land interviews faster.
             </p>
             {/* Social Icons */}
-            <p class="flex items-center text-lg font-bold">Tell your friends about us</p>
+            <p className="flex items-center text-lg font-bold">Tell your friends about us</p>
             <div className="flex space-x-4 md:w-1/3">
                 <a href="#" className="bg-violet-600 p-3 rounded-full hover:bg-violet-500 transition">
                 <FaFacebookF />
@@ -43,18 +43,18 @@ export default function Footer() {
 
           
           {/* Links */}
-          <nav class="w-full flex gap-10 text-sm md:text-[15px] lg:text-base 2xl:text-lg mt-8 lg:w-[45%] lg:mt-0 md:mt-10">
+          <nav className="w-full flex gap-10 text-sm md:text-[15px] lg:text-base 2xl:text-lg mt-8 lg:w-[45%] lg:mt-0 md:mt-10">
             <div>
-                <div class="text-white font-bold uppercase tracking-[0.5px]">Resources</div>
-                <div class="flex flex-col gap-2 lg:gap-2.5 mt-3 lg:mt-5 w-[160px] xs:w-[180px] sm:w-[200px] lg:w-[240px] 2xl:w-[300px]">
+                <div className="text-white font-bold uppercase tracking-[0.5px]">Resources</div>
+                <div className="flex flex-col gap-2 lg:gap-2.5 mt-3 lg:mt-5 w-[160px] xs:w-[180px] sm:w-[200px] lg:w-[240px] 2xl:w-[300px]">
                 <a href="#">Blog</a>
                 <a href="#">Help Center</a>
                 <a href="#">Privacy Policy</a>
                 </div>
             </div>
             <div>
-                <div class="text-white font-bold uppercase tracking-[0.5px]">Company</div>
-                <div class="flex flex-col gap-2 mt-3 lg:mt-5 lg:gap-2.5">
+                <div className="text-white font-bold uppercase tracking-[0.5px]">Company</div>
+                <div className="flex flex-col gap-2 mt-3 lg:mt-5 lg:gap-2.5">
                 <a href="#">About Us</a>
                 <a href="#">Careers</a>
                 <a href="#">Contact</a>

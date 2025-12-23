@@ -133,7 +133,7 @@ export default function MockInterview() {
   };
 
   return (
-    <div>
+    <div className="text-gray-100">
       <DashBoardLayout>
         <div className="flex flex-col gap-16 bg-gradient-to-br from-slate-900 via-indigo-1000 to-slate-900 min-h-screen py-20 md:px-16">
           {/* HEADER SECTION */}

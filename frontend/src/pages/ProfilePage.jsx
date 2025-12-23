@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 export default function ProfilePage() {
   const { user } = useContext(UserContext);
   const [profilePic, setProfilePic] = useState(user?.profilePic || "");
+  const [filter, setFilter] = useState("");
   const navigate = useNavigate();
 
   const handleProfileUpload = (e) => {
@@ -13,14 +14,24 @@ export default function ProfilePage() {
 
     const reader = new FileReader();
     reader.onload = () => {
-      setProfilePic(reader.result); // Update the UI immediately
-      user.profilePic = reader.result; // Optionally update context user object
+      setProfilePic(reader.result);
+      user.profilePic = reader.result; // optional
     };
     reader.readAsDataURL(file);
   };
 
+  const applyFilter = (type) => {
+    setFilter(type);
+  };
+
+  const generateRandomAvatar = () => {
+    const randomSeed = Math.floor(Math.random() * 10000);
+    setProfilePic(`https://api.dicebear.com/7.x/thumbs/svg?seed=${randomSeed}`);
+    setFilter(""); // reset filter
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white px-6 py-16">
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-white px-6 py-16 transition-colors">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="flex items-center justify-between">
@@ -43,7 +54,7 @@ export default function ProfilePage() {
               <img
                 src={profilePic || "https://api.dicebear.com/7.x/thumbs/svg?seed=User"}
                 alt="profile"
-                className="w-full h-full object-cover"
+                className={`w-full h-full object-cover transition-all ${filter}`}
               />
             </div>
 
@@ -70,14 +81,77 @@ export default function ProfilePage() {
 
           {/* Actions */}
           <div className="flex flex-col sm:flex-row gap-3 w-full">
-            <button className="flex-1 py-3 rounded-xl font-semibold bg-gradient-to-r from-violet-600 to-cyan-500 hover:shadow-lg transition-shadow">
-              Edit Profile
+            {/* Random Avatar */}
+            <button
+              onClick={generateRandomAvatar}
+              className="flex-1 py-3 rounded-xl font-semibold bg-gradient-to-r from-violet-600 to-cyan-500 hover:shadow-lg transition-shadow"
+            >
+              Random Avatar
             </button>
-            <button className="flex-1 py-3 rounded-xl font-semibold bg-slate-800 hover:bg-slate-700 transition-colors border border-slate-700">
-              Change Password
+
+            {/* Copy Email */}
+            <button
+              onClick={() => navigator.clipboard.writeText(user?.email || "")}
+              className="flex-1 py-3 rounded-xl font-semibold bg-cyan-500 hover:bg-cyan-400 transition-all"
+            >
+              Copy Email
             </button>
           </div>
         </div>
+
+        {/* Job Alert Settings */}
+        <div className="mt-14 bg-slate-900/60 border border-slate-800 rounded-2xl p-6 backdrop-blur-xl shadow-xl">
+            <h3 className="text-xl font-semibold mb-4 text-violet-400">
+                Job Alerts
+            </h3>
+
+            <div className="flex items-center justify-between">
+                <p className="text-slate-300">
+                Automatically receive job alerts based on your preferences
+                </p>
+
+                <input
+                type="checkbox"
+                checked={user?.jobAlert?.enabled}
+                onChange={async (e) => {
+                    try {
+                    await axiosInstance.patch(API_PATHS.user.UPDATE_JOB_ALERT, {
+                        enabled: e.target.checked,
+                    });
+
+                    user.jobAlert.enabled = e.target.checked;
+                    } catch (err) {
+                    console.error("Failed to update job alert", err);
+                    }
+                }}
+                className="w-5 h-5 accent-violet-500"
+                />
+            </div>
+
+            {user?.jobAlert?.enabled && (
+                <div className="grid md:grid-cols-2 gap-4 mt-4">
+                <div>
+                    <label className="text-sm text-slate-400">Keywords</label>
+                    <input
+                    value={user.jobAlert.keywords}
+                    disabled
+                    className="w-full mt-1 px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white"
+                    />
+                </div>
+
+                <div>
+                    <label className="text-sm text-slate-400">Location</label>
+                    <input
+                    value={user.jobAlert.location}
+                    disabled
+                    className="w-full mt-1 px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white"
+                    />
+                </div>
+                </div>
+            )}
+        </div>
+
+
 
         {/* Saved Resumes Section */}
         <div className="mt-14">

@@ -22,21 +22,10 @@ const Navbar = ({user, setOpenAuthModal}) => {
 
                 {/* Middle Links */}
                 <nav className="hidden md:flex space-x-24">
-                    <Link to="/dashboard" className="text-white-700 hover:text-violet-600 font-medium transition-colors">Dashboard</Link>
-                    <Link to="/ats-checker" className="text-white-700 hover:text-violet-600 font-medium transition-colors">Check Ats Score</Link>
-                    <Link to="/mock-interview" className="text-white-700 hover:text-violet-600 font-medium transition-colors">Mock Interview</Link>
-                    <Link
-                        to="#contact"
-                        onClick={(e) => {
-                            e.preventDefault();
-                            document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
-                        }}
-                        className="relative text-white-700 font-medium hover:text-violet-600 transition-colors"
-                        >
-                        Contact
-                        <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-violet-600 transition-all group-hover:w-full"></span>
-                    </Link>
-
+                    <Link to="/dashboard" className="text-gray-100 hover:text-violet-600 font-medium transition-colors">Dashboard</Link>
+                    <Link to="/ats-checker" className="text-gray-100 hover:text-violet-600 font-medium transition-colors">Check Ats Score</Link>
+                    <Link to="/mock-interview" className="text-gray-100 hover:text-violet-600 font-medium transition-colors">Mock Interview</Link>
+                    <Link to="/job-alerts" className="text-gray-100 hover:text-violet-600 font-medium transition-colors">Job Alerts</Link>
                 </nav>
 
                 {/* Menu Btn */}
@@ -64,7 +53,7 @@ const Navbar = ({user, setOpenAuthModal}) => {
                                         navigate('/dashboard');
                                         setMenuOpen(false);
                                     }}>
-                                    Go to Dashboard
+                                    Your Resumes
                                 </button>
 
                                 <button
@@ -79,6 +68,13 @@ const Navbar = ({user, setOpenAuthModal}) => {
                                     className={landingPageStyles.menuField}
                                 >
                                     Mock Interview
+                                </button>
+
+                                <button
+                                    onClick={() => navigate('/job-alerts')}
+                                    className={landingPageStyles.menuField}
+                                >
+                                    Job Alerts
                                 </button>
 
                                 <button

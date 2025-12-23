@@ -30,5 +30,8 @@ export const API_PATHS = {
     interview: {
         GENERATE: '/api/interview/generate',
         EVALUATE: '/api/interview/evaluate'
+    },
+    jobs: {
+        GET_ALL: '/api/jobs'
     }
 }
