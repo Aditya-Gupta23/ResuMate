@@ -47,19 +47,19 @@ It combines **resume building**, **AI-based job matching**, **interview preparat
 
 ## Project Setup
 
-### 1️⃣ Clone the Repository
+### Clone the Repository
 ```bash
 git clone https://github.com/<your-username>/ResuMate.git
 cd ResuMate
 
 Install Dependencies
 Backend
-- **cd backend**
-- **npm install**
+cd backend
+npm install
 
 Frontend
-- **cd frontend**
-- **npm install**
+cd frontend
+npm install
 
 Create a .env file inside the backend folder.
 
