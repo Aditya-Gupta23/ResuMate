@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { motion } from "framer-motion";
+// import { motion } from "framer-motion";
 import { Upload, FileCheck, Sparkles } from "lucide-react";
 import atsImage from "../assets/ResumeCheckerHeader.svg";
 import { API_PATHS } from "../utils/apiPaths";

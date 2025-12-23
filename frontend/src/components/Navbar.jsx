@@ -25,7 +25,7 @@ const Navbar = ({user, setOpenAuthModal}) => {
                     <Link to="/dashboard" className="text-gray-100 hover:text-violet-600 font-medium transition-colors">Dashboard</Link>
                     <Link to="/ats-checker" className="text-gray-100 hover:text-violet-600 font-medium transition-colors">Check Ats Score</Link>
                     <Link to="/mock-interview" className="text-gray-100 hover:text-violet-600 font-medium transition-colors">Mock Interview</Link>
-                    <Link to="/job-alerts" className="text-gray-100 hover:text-violet-600 font-medium transition-colors">Job Alerts</Link>
+                    <Link to="/job-alerts" className="text-gray-100 hover:text-violet-600 font-medium transition-colors">Job Portal</Link>
                 </nav>
 
                 {/* Menu Btn */}
