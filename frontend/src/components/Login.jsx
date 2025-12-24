@@ -6,7 +6,7 @@ import axiosInstance from "../utils/axiosInstance";
 import { API_PATHS } from "../utils/apiPaths";
 import { authStyles } from "../assets/dummystyle";
 import { Input } from "./Inputs";
-import { GoogleLogin } from "@react-oauth/google";
+// import { GoogleLogin } from "@react-oauth/google";
 
 const Login = ({setCurrentPage}) => {
 
@@ -74,7 +74,7 @@ const Login = ({setCurrentPage}) => {
 
                 {/* Google Button */}
                 <div className="mt-2 flex flex-col items-center rounded-2xl">
-                    <GoogleLogin
+                    {/* <GoogleLogin
                         clientId = {import.meta.env.VITE_GOOGLE_CLIENT_ID}
                         onSuccess={async (credentialResponse) => {
                             try {
@@ -98,7 +98,18 @@ const Login = ({setCurrentPage}) => {
                         size="large"          // "small", "medium", "large"
                         shape="circle"          // "rectangular", "pill", "circle", "square"
                         text="continue_with"    // "signin", "signup", "continue_with", "signin_with"
-                    />
+                    /> */}
+                    <button
+  type="button"
+  className="w-full mt-3 flex items-center justify-center gap-2 border rounded-xl py-3 hover:bg-gray-100"
+  onClick={() => {
+    window.location.href =
+      `${import.meta.env.VITE_BACKEND_URL}/api/v1/auth/google`;
+  }}
+>
+  Continue with Google
+</button>
+
                 </div>
 
 
