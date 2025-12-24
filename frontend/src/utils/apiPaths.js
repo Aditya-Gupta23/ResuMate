@@ -1,4 +1,4 @@
-export const BASE_URL = 'http://localhost:5050';
+export const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
 // ROUTES Used for Frontend
 export const API_PATHS = {

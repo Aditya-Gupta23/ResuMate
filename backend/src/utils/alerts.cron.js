@@ -10,7 +10,7 @@ export function startAlertCron() {
 
     for (const user of users) {
       try {
-        await axios.post("http://localhost:5050/api/alerts/send", {
+        await axios.post(`${process.env.BASE_URL}/api/alerts/send`, {
           q: user.jobAlert.keywords,
           location: user.jobAlert.location,
           email: user.email
