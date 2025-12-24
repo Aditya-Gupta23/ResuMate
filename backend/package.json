@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node src/server.js",
     "dev": "nodemon src/server.js",
-    "postinstall": "sed -i '' 's/let isDebugMode = !module.parent;/let isDebugMode = false;/' ./node_modules/pdf-parse/index.js"
+    "postinstall": "sed -i 's/let isDebugMode = !module.parent;/let isDebugMode = false;/' node_modules/pdf-parse/index.js || true"
   },
   "keywords": [],
   "author": "",
