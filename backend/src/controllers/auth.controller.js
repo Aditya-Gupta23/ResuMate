@@ -83,56 +83,98 @@ const generateOtp = () => {
 }
 
 
+// export const signup = async (req, res) => {
+
+//     try {
+//         const { name, email, password } = req.body;
+//         const existingUser = await User.findOne({ email });
+//         if (existingUser) {
+//             return res.status(400).json({ message: "Email already registered" });
+//         }
+
+//         const hashedPassword = await bcrypt.hash(password, 10);
+//         const otp = generateOtp();
+//         const otpHash = await bcrypt.hash(otp, 10);
+//         const otpExpiry = new Date(Date.now() + 10 * 60 * 1000);
+
+//         const user = await User.create({
+//             name, email, password: hashedPassword,
+//             isVerified: false, otpHash, otpExpiry
+//         });
+
+//         // try {
+//         //     await sendOtpEmail(email, otp)
+//         // } catch (error) {
+//         //     await User.findByIdAndDelete(user._id);
+//         //     console.error("Mailer error:", error);
+//         //     return res.status(500).json({ message: "Could not send verification email. Try again." })
+//         // }
+
+//         try {
+//   await sendOtpEmail(email, otp);
+// } catch (error) {
+//   console.error("Mailer error:", error);
+//   // DO NOT fail signup
+// }
+
+// return res.status(201).json({
+//   success: true,
+//   message: "User registered. Please verify OTP.",
+//   email: user.email
+// });
+
+
+//         return res.status(201).json({
+//             message: "User registered successfully. Please verify your email.",
+//             email: user.email
+//         });
+//     } catch (error) {
+//         console.error("Signup Error:", error);
+//         res.status(500).json({ message: "Server error" });
+//     }
+// }
+
 export const signup = async (req, res) => {
+  try {
+    const { name, email, password } = req.body;
 
-    try {
-        const { name, email, password } = req.body;
-        const existingUser = await User.findOne({ email });
-        if (existingUser) {
-            return res.status(400).json({ message: "Email already registered" });
-        }
-
-        const hashedPassword = await bcrypt.hash(password, 10);
-        const otp = generateOtp();
-        const otpHash = await bcrypt.hash(otp, 10);
-        const otpExpiry = new Date(Date.now() + 10 * 60 * 1000);
-
-        const user = await User.create({
-            name, email, password: hashedPassword,
-            isVerified: false, otpHash, otpExpiry
-        });
-
-        // try {
-        //     await sendOtpEmail(email, otp)
-        // } catch (error) {
-        //     await User.findByIdAndDelete(user._id);
-        //     console.error("Mailer error:", error);
-        //     return res.status(500).json({ message: "Could not send verification email. Try again." })
-        // }
-
-        try {
-  await sendOtpEmail(email, otp);
-} catch (error) {
-  console.error("Mailer error:", error);
-  // DO NOT fail signup
-}
-
-return res.status(201).json({
-  success: true,
-  message: "User registered. Please verify OTP.",
-  email: user.email
-});
-
-
-        return res.status(201).json({
-            message: "User registered successfully. Please verify your email.",
-            email: user.email
-        });
-    } catch (error) {
-        console.error("Signup Error:", error);
-        res.status(500).json({ message: "Server error" });
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ message: "Email already registered" });
     }
-}
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const otp = generateOtp();
+    const otpHash = await bcrypt.hash(otp, 10);
+    const otpExpiry = new Date(Date.now() + 10 * 60 * 1000);
+
+    const user = await User.create({
+      name,
+      email,
+      password: hashedPassword,
+      isVerified: false,
+      otpHash,
+      otpExpiry,
+    });
+
+    //  SEND RESPONSE FIRST
+    res.status(201).json({
+      success: true,
+      message: "User created. Please verify OTP.",
+      email: user.email,
+    });
+
+    //  SEND MAIL ASYNC (DO NOT BLOCK)
+    sendOtpEmail(email, otp).catch((err) => {
+      console.error("Mailer error (async):", err);
+    });
+
+  } catch (error) {
+    console.error("Signup Error:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
 
 export const verifyOtp=async (req,res)=>{
     try {
