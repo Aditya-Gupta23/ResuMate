@@ -102,21 +102,28 @@ export const signup = async (req, res) => {
             isVerified: false, otpHash, otpExpiry
         });
 
-        try {
-            await sendOtpEmail(email, otp)
-        } catch (error) {
-            await User.findByIdAndDelete(user._id);
-            console.error("Mailer error:", error);
-            return res.status(500).json({ message: "Could not send verification email. Try again." })
-        }
+        // try {
+        //     await sendOtpEmail(email, otp)
+        // } catch (error) {
+        //     await User.findByIdAndDelete(user._id);
+        //     console.error("Mailer error:", error);
+        //     return res.status(500).json({ message: "Could not send verification email. Try again." })
+        // }
 
-        // const token = jwt.sign(
-        //     { id: user._id },
-        //     process.env.JWT_SECRET,
-        //     { expiresIn: "7d" }
-        // );
-        
-        // const token=signJwt(user._id)
+        try {
+  await sendOtpEmail(email, otp);
+} catch (error) {
+  console.error("Mailer error:", error);
+  // DO NOT fail signup
+}
+
+return res.status(201).json({
+  success: true,
+  message: "User registered. Please verify OTP.",
+  email: user.email
+});
+
+
         return res.status(201).json({
             message: "User registered successfully. Please verify your email.",
             email: user.email
