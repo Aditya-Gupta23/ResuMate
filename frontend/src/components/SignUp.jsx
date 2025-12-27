@@ -43,6 +43,7 @@ const SignUp = ({setCurrentPage}) => {
             }
             
         } catch(error) {
+            console.log("error in sending otp: ",error)
             setError(error.response?.data?.message || 'Something went wrong. Please try again later.');
         }
     }
